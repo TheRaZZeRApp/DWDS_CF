@@ -25,7 +25,7 @@ ex. Paul Koenig for
 
 ## Version History
 
-See Changelog.md
+See `CHANGELOG.md`
 
 ## License
 
