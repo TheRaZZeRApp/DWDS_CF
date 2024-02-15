@@ -110,7 +110,7 @@
                             <properties/>
                             <border type="empty"/>
                             <children>
-                              <grid id="74ba0" binding="generalPanel" layout-manager="GridLayoutManager" row-count="16" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                              <grid id="74ba0" binding="generalPanel" layout-manager="GridLayoutManager" row-count="15" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                                 <margin top="0" left="0" bottom="0" right="0"/>
                                 <constraints/>
                                 <properties/>
@@ -118,7 +118,7 @@
                                 <children>
                                   <hspacer id="e10d">
                                     <constraints>
-                                      <grid row="1" column="0" row-span="15" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                                      <grid row="1" column="0" row-span="14" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
                                         <minimum-size width="5" height="-1"/>
                                         <preferred-size width="5" height="-1"/>
                                         <maximum-size width="5" height="-1"/>
@@ -136,7 +136,7 @@
                                   </vspacer>
                                   <hspacer id="425c2">
                                     <constraints>
-                                      <grid row="6" column="4" row-span="10" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                                      <grid row="6" column="4" row-span="9" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
                                         <minimum-size width="5" height="-1"/>
                                         <preferred-size width="5" height="-1"/>
                                         <maximum-size width="5" height="-1"/>
@@ -145,7 +145,7 @@
                                   </hspacer>
                                   <vspacer id="26fc1">
                                     <constraints>
-                                      <grid row="15" column="1" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                                      <grid row="14" column="1" row-span="1" col-span="3" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                   </vspacer>
                                   <component id="b1630" class="javax.swing.JLabel">
@@ -182,24 +182,6 @@
                                       <text value="Genre:"/>
                                     </properties>
                                   </component>
-                                  <grid id="29f2d" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                                    <margin top="0" left="0" bottom="0" right="0"/>
-                                    <constraints>
-                                      <grid row="14" column="1" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                                    </constraints>
-                                    <properties/>
-                                    <border type="none"/>
-                                    <children>
-                                      <component id="36b1c" class="javax.swing.JLabel" binding="generalInfoLabel">
-                                        <constraints>
-                                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                                        </constraints>
-                                        <properties>
-                                          <text value=""/>
-                                        </properties>
-                                      </component>
-                                    </children>
-                                  </grid>
                                   <component id="6830a" class="javax.swing.JLabel">
                                     <constraints>
                                       <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -445,7 +427,7 @@
                             <properties/>
                             <border type="empty"/>
                             <children>
-                              <grid id="3feb1" layout-manager="GridLayoutManager" row-count="38" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                              <grid id="3feb1" layout-manager="GridLayoutManager" row-count="55" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                                 <margin top="0" left="0" bottom="0" right="0"/>
                                 <constraints/>
                                 <properties/>
@@ -471,7 +453,7 @@
                                   </vspacer>
                                   <hspacer id="b608d">
                                     <constraints>
-                                      <grid row="3" column="3" row-span="35" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                                      <grid row="3" column="3" row-span="52" col-span="1" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
                                         <minimum-size width="5" height="-1"/>
                                         <preferred-size width="5" height="-1"/>
                                         <maximum-size width="5" height="-1"/>
@@ -528,7 +510,7 @@
                                   </component>
                                   <component id="fccfc" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Berliner Zeitung (1994–2005)"/>
@@ -536,7 +518,7 @@
                                   </component>
                                   <component id="e937a" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="17" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Der Tagesspiegel (ab 1996)"/>
@@ -544,7 +526,7 @@
                                   </component>
                                   <component id="c2959" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="28" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Blogs"/>
@@ -568,7 +550,7 @@
                                   </component>
                                   <component id="fd160" class="javax.swing.JCheckBox" binding="cptspCheck">
                                     <constraints>
-                                      <grid row="12" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="17" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -576,7 +558,7 @@
                                   </component>
                                   <component id="896f0" class="javax.swing.JCheckBox" binding="cpblogsCheck">
                                     <constraints>
-                                      <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="28" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -584,7 +566,7 @@
                                   </component>
                                   <component id="aba0d" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="16" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="30" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="DTA-Erweiterungen (1465–1969)"/>
@@ -592,7 +574,7 @@
                                   </component>
                                   <component id="8008" class="javax.swing.JCheckBox" binding="cpdtaeCheck">
                                     <constraints>
-                                      <grid row="16" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="30" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -600,7 +582,7 @@
                                   </component>
                                   <component id="53367" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="17" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="31" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Archiv der Gegenwart (1931–2000)"/>
@@ -608,10 +590,10 @@
                                   </component>
                                   <component id="8411e" class="javax.swing.JCheckBox" binding="cpadgCheck">
                                     <constraints>
-                                      <grid row="17" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="31" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
-                                      <enabled value="false"/>
+                                      <enabled value="true"/>
                                       <text value=""/>
                                       <toolTipText value="Currently not available."/>
                                     </properties>
@@ -664,7 +646,7 @@
                                         </constraints>
                                         <properties/>
                                       </component>
-                                      <grid id="60c42" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                                      <grid id="60c42" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                                         <margin top="0" left="0" bottom="0" right="0"/>
                                         <constraints>
                                           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -677,15 +659,23 @@
                                               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                                             </constraints>
                                             <properties>
-                                              <text value="All"/>
+                                              <text value="All (Free)"/>
                                             </properties>
                                           </component>
                                           <component id="2f464" class="javax.swing.JButton" binding="defaultButton" default-binding="true">
                                             <constraints>
-                                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                                              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                                             </constraints>
                                             <properties>
                                               <text value="Default"/>
+                                            </properties>
+                                          </component>
+                                          <component id="85f1c" class="javax.swing.JButton" binding="allExtendedButton">
+                                            <constraints>
+                                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                                            </constraints>
+                                            <properties>
+                                              <text value="All"/>
                                             </properties>
                                           </component>
                                         </children>
@@ -720,7 +710,7 @@
                                   <grid id="44151" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                                     <margin top="0" left="0" bottom="0" right="0"/>
                                     <constraints>
-                                      <grid row="10" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                                      <grid row="12" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties/>
                                     <border type="none"/>
@@ -745,7 +735,7 @@
                                   <grid id="57bd4" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                                     <margin top="0" left="0" bottom="0" right="0"/>
                                     <constraints>
-                                      <grid row="13" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                                      <grid row="19" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties/>
                                     <border type="none"/>
@@ -770,7 +760,7 @@
                                   <grid id="1eb8c" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                                     <margin top="0" left="0" bottom="0" right="0"/>
                                     <constraints>
-                                      <grid row="15" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                                      <grid row="29" column="1" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties/>
                                     <border type="none"/>
@@ -794,7 +784,7 @@
                                   </grid>
                                   <component id="31c4f" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="20" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="35" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Gesprochene Sprache"/>
@@ -802,7 +792,7 @@
                                   </component>
                                   <component id="ba899" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="22" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="39" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Politische Reden (1982–2020)"/>
@@ -810,7 +800,7 @@
                                   </component>
                                   <component id="e0d15" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="24" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="41" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Soldatenbriefe (1745–1872)"/>
@@ -818,7 +808,7 @@
                                   </component>
                                   <component id="3666e" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="26" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="43" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="A. v. Humboldts Publizistik (dt., 1790–1859)"/>
@@ -826,7 +816,7 @@
                                   </component>
                                   <component id="1b233" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="28" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="45" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Der Neue Pitaval (1842–1890)"/>
@@ -834,7 +824,7 @@
                                   </component>
                                   <component id="50a47" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="30" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="47" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Deutsche Kunst und Dekoration (1897–1932)"/>
@@ -842,7 +832,7 @@
                                   </component>
                                   <component id="f6152" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="32" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="49" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="stimm-los – Wiedergefundene Perlen der Literatur"/>
@@ -850,7 +840,7 @@
                                   </component>
                                   <component id="30571" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="36" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="53" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Gesetze und Verordnungen (1897–2023)"/>
@@ -858,7 +848,7 @@
                                   </component>
                                   <component id="14bd2" class="javax.swing.JCheckBox" binding="cpspkCheck">
                                     <constraints>
-                                      <grid row="20" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="35" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -866,7 +856,7 @@
                                   </component>
                                   <component id="6e613" class="javax.swing.JCheckBox" binding="cppolitische_redenCheck">
                                     <constraints>
-                                      <grid row="22" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="39" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -874,7 +864,7 @@
                                   </component>
                                   <component id="3f191" class="javax.swing.JCheckBox" binding="cpsoldatenbriefeCheck">
                                     <constraints>
-                                      <grid row="24" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="41" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -882,7 +872,7 @@
                                   </component>
                                   <component id="f3f64" class="javax.swing.JCheckBox" binding="cppitavalCheck">
                                     <constraints>
-                                      <grid row="28" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="45" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -890,7 +880,7 @@
                                   </component>
                                   <component id="fb56c" class="javax.swing.JCheckBox" binding="cpdekudeCheck">
                                     <constraints>
-                                      <grid row="30" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="47" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -898,7 +888,7 @@
                                   </component>
                                   <component id="7f573" class="javax.swing.JCheckBox" binding="cpstimmlosCheck">
                                     <constraints>
-                                      <grid row="32" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="49" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -906,7 +896,7 @@
                                   </component>
                                   <component id="46f09" class="javax.swing.JCheckBox" binding="cpgesetzeCheck">
                                     <constraints>
-                                      <grid row="36" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="53" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -946,7 +936,7 @@
                                   </component>
                                   <component id="dbb51" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="18" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="32" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Polytechnisches Journal"/>
@@ -954,7 +944,7 @@
                                   </component>
                                   <component id="52a20" class="javax.swing.JCheckBox" binding="cpdinglerCheck">
                                     <constraints>
-                                      <grid row="18" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="32" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -962,7 +952,7 @@
                                   </component>
                                   <component id="8d11a" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="19" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="34" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Filmuntertitel"/>
@@ -970,7 +960,7 @@
                                   </component>
                                   <component id="7e889" class="javax.swing.JCheckBox" binding="cpuntertitelCheck">
                                     <constraints>
-                                      <grid row="19" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="34" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -978,7 +968,7 @@
                                   </component>
                                   <component id="2faea" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="21" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="38" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="DDR"/>
@@ -986,7 +976,7 @@
                                   </component>
                                   <component id="6a87d" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="23" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="40" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Bundestagskorpus (1949–2017)"/>
@@ -994,7 +984,7 @@
                                   </component>
                                   <component id="b4606" class="javax.swing.JCheckBox" binding="cpddrCheck">
                                     <constraints>
-                                      <grid row="21" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="38" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -1002,7 +992,7 @@
                                   </component>
                                   <component id="3c82f" class="javax.swing.JCheckBox" binding="cpbundestagCheck">
                                     <constraints>
-                                      <grid row="23" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="40" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -1010,7 +1000,7 @@
                                   </component>
                                   <component id="ed70e" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="25" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="42" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Korpus Patiententexte (1834–1957)"/>
@@ -1018,7 +1008,7 @@
                                   </component>
                                   <component id="3eaae" class="javax.swing.JCheckBox" binding="cpcopadocsCheck">
                                     <constraints>
-                                      <grid row="25" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="42" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -1026,7 +1016,7 @@
                                   </component>
                                   <component id="7f6d4" class="javax.swing.JCheckBox" binding="cpavhbernCheck">
                                     <constraints>
-                                      <grid row="26" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="43" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -1034,7 +1024,7 @@
                                   </component>
                                   <component id="c0d0e" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="27" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="44" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Nachrichten aus der Brüdergemeine (1819–1894)"/>
@@ -1042,7 +1032,7 @@
                                   </component>
                                   <component id="48cfd" class="javax.swing.JCheckBox" binding="cpbruedergemeineCheck">
                                     <constraints>
-                                      <grid row="27" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="44" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -1050,7 +1040,7 @@
                                   </component>
                                   <component id="33817" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="29" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="46" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Briefe von Jean Paul (1780–1825)"/>
@@ -1058,7 +1048,7 @@
                                   </component>
                                   <component id="8db5f" class="javax.swing.JCheckBox" binding="cpjeanpaulCheck">
                                     <constraints>
-                                      <grid row="29" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="46" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -1066,7 +1056,7 @@
                                   </component>
                                   <component id="5b13f" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="31" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="48" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Neuer Deutscher Novellenschatz (1884–1887)"/>
@@ -1074,7 +1064,7 @@
                                   </component>
                                   <component id="7e7d8" class="javax.swing.JCheckBox" binding="cpnschatzdeuCheck">
                                     <constraints>
-                                      <grid row="31" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="48" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -1082,7 +1072,7 @@
                                   </component>
                                   <component id="3b6a8" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="33" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="50" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Wikibooks-Korpus"/>
@@ -1090,7 +1080,7 @@
                                   </component>
                                   <component id="5d995" class="javax.swing.JCheckBox" binding="cpwikibooksCheck">
                                     <constraints>
-                                      <grid row="33" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="50" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -1098,7 +1088,7 @@
                                   </component>
                                   <component id="92808" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="34" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="51" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Wikipedia-Korpus"/>
@@ -1106,7 +1096,7 @@
                                   </component>
                                   <component id="aa3ff" class="javax.swing.JCheckBox" binding="cpwikipediaCheck">
                                     <constraints>
-                                      <grid row="34" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="51" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -1114,7 +1104,7 @@
                                   </component>
                                   <component id="46be8" class="javax.swing.JLabel">
                                     <constraints>
-                                      <grid row="35" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="52" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value="Wikivoyage-Korpus"/>
@@ -1122,7 +1112,7 @@
                                   </component>
                                   <component id="efa3d" class="javax.swing.JCheckBox" binding="cpwikivoyageCheck">
                                     <constraints>
-                                      <grid row="35" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="52" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
@@ -1130,15 +1120,304 @@
                                   </component>
                                   <vspacer id="2f47f">
                                     <constraints>
-                                      <grid row="37" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                                      <grid row="54" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                   </vspacer>
                                   <component id="c6066" class="javax.swing.JCheckBox" binding="cpbzCheck">
                                     <constraints>
-                                      <grid row="11" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                      <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                                     </constraints>
                                     <properties>
                                       <text value=""/>
+                                    </properties>
+                                  </component>
+                                  <component id="eab32" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="ZDL-Regionalkorpus (ab 1993)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="7b969" class="javax.swing.JCheckBox" binding="cpregionalCheck">
+                                    <constraints>
+                                      <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="497c3" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="WebXL"/>
+                                    </properties>
+                                  </component>
+                                  <component id="7111a" class="javax.swing.JCheckBox" binding="cpwebxlCheck">
+                                    <constraints>
+                                      <grid row="11" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="b2149" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Berliner Zeitung (1945–1993)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="c0b51" class="javax.swing.JCheckBox" binding="cpbz_ppCheck">
+                                    <constraints>
+                                      <grid row="13" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="3d8b8" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="15" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Frankfurter Allgemeine Zeitung"/>
+                                    </properties>
+                                  </component>
+                                  <component id="5c0da" class="javax.swing.JCheckBox" binding="cpfazCheck">
+                                    <constraints>
+                                      <grid row="15" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="58446" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="16" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="neues deutschland (1946–1990)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="34d54" class="javax.swing.JCheckBox" binding="cpndCheck">
+                                    <constraints>
+                                      <grid row="16" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="631a" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="18" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Die ZEIT (1946–2023)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="21aec" class="javax.swing.JCheckBox" binding="cpzeitCheck">
+                                    <constraints>
+                                      <grid row="18" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="75a1e" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="37" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Berliner Wendekorpus"/>
+                                    </properties>
+                                  </component>
+                                  <component id="436c0" class="javax.swing.JCheckBox" binding="cpwendeCheck">
+                                    <constraints>
+                                      <grid row="37" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="2629d" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="36" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Text+Berg"/>
+                                    </properties>
+                                  </component>
+                                  <component id="92453" class="javax.swing.JCheckBox" binding="cptextbergCheck">
+                                    <constraints>
+                                      <grid row="36" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="2707" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="33" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Dortmunder Chat-Korpus"/>
+                                    </properties>
+                                  </component>
+                                  <component id="d3df0" class="javax.swing.JCheckBox" binding="cpibk_dchatCheck">
+                                    <constraints>
+                                      <grid row="33" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="e0f54" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="20" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Webkorpus"/>
+                                    </properties>
+                                  </component>
+                                  <component id="91e49" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="21" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Webmonitor"/>
+                                    </properties>
+                                  </component>
+                                  <component id="66997" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="22" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Webkorpus Ballsportarten"/>
+                                    </properties>
+                                  </component>
+                                  <component id="49c22" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="23" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Jurakorpus"/>
+                                    </properties>
+                                  </component>
+                                  <component id="7f034" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="24" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Medizinkorpus"/>
+                                    </properties>
+                                  </component>
+                                  <component id="d51a4" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="25" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Corona-Korpus"/>
+                                    </properties>
+                                  </component>
+                                  <component id="57230" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="26" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="Mode- und Beauty-Blogs"/>
+                                    </properties>
+                                  </component>
+                                  <component id="9f923" class="javax.swing.JCheckBox" binding="cpwebCheck">
+                                    <constraints>
+                                      <grid row="20" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="95dbf" class="javax.swing.JCheckBox" binding="cpwebmonitorCheck">
+                                    <constraints>
+                                      <grid row="21" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="11eed" class="javax.swing.JCheckBox" binding="cpballsportCheck">
+                                    <constraints>
+                                      <grid row="22" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="62eec" class="javax.swing.JCheckBox" binding="cpjuraCheck">
+                                    <constraints>
+                                      <grid row="23" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="10ee6" class="javax.swing.JCheckBox" binding="cpmedizinCheck">
+                                    <constraints>
+                                      <grid row="24" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="aa2b2" class="javax.swing.JCheckBox" binding="cpcoronaCheck">
+                                    <constraints>
+                                      <grid row="25" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="7df45" class="javax.swing.JCheckBox" binding="cpmodeblogsBlogs">
+                                    <constraints>
+                                      <grid row="26" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
+                                    </properties>
+                                  </component>
+                                  <component id="2ba4b" class="javax.swing.JLabel">
+                                    <constraints>
+                                      <grid row="27" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <text value="IT-Blogs"/>
+                                    </properties>
+                                  </component>
+                                  <component id="eaad8" class="javax.swing.JCheckBox" binding="cpit_blogsCheck">
+                                    <constraints>
+                                      <grid row="27" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+                                    </constraints>
+                                    <properties>
+                                      <horizontalTextPosition value="2"/>
+                                      <text value="(Needs Auth)"/>
                                     </properties>
                                   </component>
                                 </children>

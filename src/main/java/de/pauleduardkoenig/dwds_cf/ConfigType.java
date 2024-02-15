@@ -13,7 +13,9 @@ import java.time.Year;
  */
 public enum ConfigType implements ConfigEnum<ConfigType> {
     VERSION(Constants.VERSION),
+    SESSION_TOKEN(""),
     LOG_LEVEL("1"),
+    FETCH_TRIES("3"),
     CONNECT_TIMEOUT("5000"),
     READ_TIMEOUT("20000"),
     WORDLIST("./data/words.txt"),
@@ -71,6 +73,23 @@ public enum ConfigType implements ConfigEnum<ConfigType> {
     CORPORA_GESETZE(false),
     CORPORA_KERN(true),
     CORPORA_DTAK(false),
+    CORPORA_CPREGIONAL(false),
+    CORPORA_CPWEBXL(false),
+    CORPORA_CPBZ_PP(false),
+    CORPORA_CPFAZ(false),
+    CORPORA_CPND(false),
+    CORPORA_CPZEIT(false),
+    CORPORA_CPWEB(false),
+    CORPORA_CPWEBMONITOR(false),
+    CORPORA_CPBALLSPORT(false),
+    CORPORA_CPJURA(false),
+    CORPORA_CPMEDIZIN(false),
+    CORPORA_CPCORONA(false),
+    CORPORA_CPMODEBLOGS(false),
+    CORPORA_CPIT_BLOGS(false),
+    CORPORA_CPIBK_DCHAT(false),
+    CORPORA_CPTEXTBERG(false),
+    CORPORA_CPWENDE(false),
     CORPORA_KORPUS21(false);
 
 

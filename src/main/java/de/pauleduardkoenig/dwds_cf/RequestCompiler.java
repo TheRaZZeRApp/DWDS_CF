@@ -34,7 +34,6 @@ public class RequestCompiler {
         boolean multiwordrequest = dcc.contains("%WORD%");
         Set<String> wordList = new LinkedHashSet<>(multiwordrequest ? Arrays.stream(wordlist.split("\n")).map(String::trim).toList() : Set.of("dcc"));
         Logging.log(DWDS_CF.logger, multiwordrequest ? ("(Fetcher) Start fetch for " + wordList.size() + " words" + (wordList.size() != 1 ? "!" : "")) : "(Fetcher) Fetching with DCC \"" + dcc + "\"");
-
         for (String word : wordList) {
             if (!compileThreadRunning) {
                 break;
@@ -55,12 +54,12 @@ public class RequestCompiler {
                 requestBuilder.setDdc(dcc.trim());
             }
 
-            int coutnerCorpus = 0;
+            int counterCorpus = 0;
             for (String corpus : corpora) {
                 if (!compileThreadRunning) {
                     break;
                 }
-                Logging.detail(DWDS_CF.logger, "(Fetcher) Fetching corpora " + (coutnerCorpus++) + "/" + corpora.size() + " (" + corpus + ")");
+                Logging.detail(DWDS_CF.logger, "(Fetcher) Fetching corpora " + (counterCorpus++) + "/" + corpora.size() + " (" + corpus + ")");
                 requestBuilder.setCorpus(corpus);
                 switch (requestBuilder.getView()) {
                     case CSV, TSV ->
@@ -88,7 +87,10 @@ public class RequestCompiler {
     }
 
     private static void exportCSVTSV(DWDSRequestBuilder requestBuilder, String path, String corpus, String word, List<Trio<String[], String, List<CSVRow>>> masterRows, boolean combineCorpora, String customRows) {
-        CSVFile csvFile = requestBuilder.getView() == DWDSRequestBuilder.ViewType.TSV ? Fetcher.fetchTSV(requestBuilder) : Fetcher.fetchCSV(requestBuilder);
+        CSVFile csvFile = requestBuilder.getView() == DWDSRequestBuilder.ViewType.TSV ? Fetcher.fetchCSV(requestBuilder, '\t') : Fetcher.fetchCSV(requestBuilder, ',');
+        if (csvFile == null) {
+            return;
+        }
         if (DWDS_CF.config.getAsBoolean(ConfigType.CSV_EXPORT_COMBINE_CORPORA) && combineCorpora) {
             if (csvFile.getLines().length != 0 && !csvFile.getLine(0).getCell(1).isBlank()) {
                 masterRows.add(new Trio<>(csvFile.getHeader(), corpus, new LinkedList<>(Arrays.stream(csvFile.getLines()).toList())));
@@ -100,6 +102,9 @@ public class RequestCompiler {
 
     private static void exportJSON(DWDSRequestBuilder requestBuilder, String path, String corpus, String word, List<JsonElement> jsonElements, boolean combineCorpora) {
         JSONConfigSection jsonConfigSection = Fetcher.fetchJSON(requestBuilder);
+        if (jsonConfigSection == null) {
+            return;
+        }
         if (!combineCorpora) {
             JSONSaver.save(jsonConfigSection, new File(path + "dwds_" + corpus + "_" + Utils.escapeWordToPath(word) + "_" + DateUtils.getCurrentDateTimePath() + ".json"), StandardCharsets.UTF_8, DWDS_CF.config.getAsInt(ConfigType.JSON_COLLAPSE_LEVEL), DWDS_CF.logger);
         } else {
@@ -113,6 +118,10 @@ public class RequestCompiler {
     }
 
     private static void exportTCF(DWDSRequestBuilder requestBuilder, String path, String corpus, String word) {
-        FileUtils.exportFile(Fetcher.fetchTCF(requestBuilder), new File(path + "dwds_" + corpus + "_" + Utils.escapeWordToPath(word) + "_" + DateUtils.getCurrentDateTimePath() + ".tcf"), StandardCharsets.UTF_8, DWDS_CF.logger);
+        String tcf = Fetcher.fetchTCF(requestBuilder);
+        if (tcf == null) {
+            return;
+        }
+        FileUtils.exportFile(tcf, new File(path + "dwds_" + corpus + "_" + Utils.escapeWordToPath(word) + "_" + DateUtils.getCurrentDateTimePath() + ".tcf"), StandardCharsets.UTF_8, DWDS_CF.logger);
     }
 }

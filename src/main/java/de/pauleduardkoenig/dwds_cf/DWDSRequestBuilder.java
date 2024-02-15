@@ -26,9 +26,17 @@ public class DWDSRequestBuilder {
     private int limit = 50;
     private int page = -1;
     private ViewType view = ViewType.CSV;
-
     public DWDSRequestBuilder() {
         // empty
+    }
+
+    public String getCorpus() {
+        return corpus;
+    }
+
+    public DWDSRequestBuilder setCorpus(String corpus) {
+        this.corpus = corpus;
+        return this;
     }
 
     public String getDdc() {
@@ -61,11 +69,6 @@ public class DWDSRequestBuilder {
 
     public DWDSRequestBuilder setView(ViewType view) {
         this.view = view;
-        return this;
-    }
-
-    public DWDSRequestBuilder setCorpus(String corpus) {
-        this.corpus = corpus;
         return this;
     }
 

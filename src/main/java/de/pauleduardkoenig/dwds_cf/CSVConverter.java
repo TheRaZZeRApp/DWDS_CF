@@ -23,7 +23,7 @@ public class CSVConverter {
     private static final Pattern CUSTOM_ROW_PATTERN = Pattern.compile("(\\d*);(.*)");
 
     public static void formatCSVFile(List<CSVRow> lines, File export, String[] header, Map<Integer, String> customRows) {
-        CSVWriter csvWriter = new CSVWriter(DWDS_CF.config.getAsString(ConfigType.CSV_SEPARATOR), StandardCharsets.UTF_8, "\n", export, DWDS_CF.config.getAsBoolean(ConfigType.CSV_ESCAPE_HTML), DWDS_CF.config.getAsString(ConfigType.CSV_ESCAPE), DWDS_CF.logger);
+        CSVWriter csvWriter = new CSVWriter(DWDS_CF.config.getAsString(ConfigType.CSV_SEPARATOR).charAt(0), StandardCharsets.UTF_8, "\n", export, DWDS_CF.config.getAsBoolean(ConfigType.CSV_ESCAPE_HTML), DWDS_CF.config.getAsString(ConfigType.CSV_ESCAPE).charAt(0), DWDS_CF.logger);
         int blankLines = DWDS_CF.config.getAsInt(ConfigType.CSV_SPACES);
         csvWriter.addNextLine(mergeRows(header, customRows, true));
         addBlankLines(csvWriter, blankLines);
