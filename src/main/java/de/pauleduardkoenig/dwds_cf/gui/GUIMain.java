@@ -722,11 +722,57 @@ public class GUIMain {
             corpora.add("public");
         }
 
+        if (cpregionalCheck.isSelected()) {
+            corpora.add("regional");
+        }
+        if (cpwebxlCheck.isSelected()) {
+            corpora.add("webxl");
+        }
+        if (cpbz_ppCheck.isSelected()) {
+            corpora.add("bz_pp");
+        }
+
         if (cpbzCheck.isSelected()) {
             corpora.add("bz");
         }
+
+        if (cpfazCheck.isSelected()) {
+            corpora.add("faz");
+        }
+        if (cpndCheck.isSelected()) {
+            corpora.add("nd");
+        }
+
         if (cptspCheck.isSelected()) {
             corpora.add("tsp");
+        }
+
+        if (cpzeitCheck.isSelected()) {
+            corpora.add("zeit");
+        }
+        if (cpwebCheck.isSelected()) {
+            corpora.add("web");
+        }
+        if (cpwebmonitorCheck.isSelected()) {
+            corpora.add("webmonitor");
+        }
+        if (cpballsportCheck.isSelected()) {
+            corpora.add("ballsport");
+        }
+        if (cpjuraCheck.isSelected()) {
+            corpora.add("jura");
+        }
+        if (cpmedizinCheck.isSelected()) {
+            corpora.add("medizin");
+        }
+        if (cpcoronaCheck.isSelected()) {
+            corpora.add("corona");
+        }
+        if (cpmodeblogsBlogs.isSelected()) {
+            corpora.add("modeblogs");
+        }
+        if (cpit_blogsCheck.isSelected()) {
+            corpora.add("it_blogs");
         }
 
         if (cpblogsCheck.isSelected()) {
@@ -741,11 +787,20 @@ public class GUIMain {
         if (cpdinglerCheck.isSelected()) {
             corpora.add("dingler");
         }
+        if (cpibk_dchatCheck.isSelected()) {
+            corpora.add("ibk_dchat");
+        }
         if (cpuntertitelCheck.isSelected()) {
             corpora.add("untertitel");
         }
         if (cpspkCheck.isSelected()) {
             corpora.add("spk");
+        }
+        if (cptextbergCheck.isSelected()) {
+            corpora.add("textberg");
+        }
+        if (cpwendeCheck.isSelected()) {
+            corpora.add("wende");
         }
         if (cpddrCheck.isSelected()) {
             corpora.add("ddr");
@@ -796,58 +851,10 @@ public class GUIMain {
             corpora.add("gesetze");
         }
 
-        // Auth Corpora
-        if (cpregionalCheck.isSelected()) {
-            corpora.add("regional");
-        }
-        if (cpwebxlCheck.isSelected()) {
-            corpora.add("webxl");
-        }
-        if (cpbz_ppCheck.isSelected()) {
-            corpora.add("bz_pp");
-        }
-        if (cpfazCheck.isSelected()) {
-            corpora.add("faz");
-        }
-        if (cpndCheck.isSelected()) {
-            corpora.add("nd");
-        }
-        if (cpzeitCheck.isSelected()) {
-            corpora.add("zeit");
-        }
-        if (cpwebCheck.isSelected()) {
-            corpora.add("web");
-        }
-        if (cpwebmonitorCheck.isSelected()) {
-            corpora.add("webmonitor");
-        }
-        if (cpballsportCheck.isSelected()) {
-            corpora.add("ballsport");
-        }
-        if (cpjuraCheck.isSelected()) {
-            corpora.add("jura");
-        }
-        if (cpmedizinCheck.isSelected()) {
-            corpora.add("medizin");
-        }
-        if (cpcoronaCheck.isSelected()) {
-            corpora.add("corona");
-        }
-        if (cpmodeblogsBlogs.isSelected()) {
-            corpora.add("modeblogs");
-        }
-        if (cpit_blogsCheck.isSelected()) {
-            corpora.add("it_blogs");
-        }
-        if (cpibk_dchatCheck.isSelected()) {
-            corpora.add("ibk_dchat");
-        }
-        if (cptextbergCheck.isSelected()) {
-            corpora.add("textberg");
-        }
-        if (cpwendeCheck.isSelected()) {
-            corpora.add("wende");
-        }
+
+
+
+
 
         if (corpora.isEmpty()) {
             Logging.error(DWDS_CF.logger, "No corpus selected. Picked default coprus (kern)!");
