@@ -70,6 +70,7 @@ public class RequestCompiler {
             }
 
             if (combineCorpora) {
+
                 switch (requestBuilder.getView()) {
                     case CSV, TSV ->
                             CSVConverter.formatCSVFile(CSVFormatter.transformCorpusCSVFiles(entriesCombinedCSV), new File(path + "dwds_combined_" + Utils.escapeWordToPath(word) + "_" + DateUtils.getCurrentDateTimePath() + ".csv"), Constants.CSV_KWIC_HEADER.toArray(new String[0]), CSVConverter.compileCustomRows(customRows));

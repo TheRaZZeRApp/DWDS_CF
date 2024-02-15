@@ -35,7 +35,7 @@ public class Fetcher {
     }
 
     private static Object fetchContent(DWDSRequestBuilder requestBuilder) {
-        List<String> content = HTTPUtils.getHTTPRequestContentList(requestBuilder.setView(DWDSRequestBuilder.ViewType.CSV).build(), getHTTPSettings(), DWDS_CF.logger);
+        List<String> content = HTTPUtils.getHTTPRequestContentList(requestBuilder.build(), getHTTPSettings(), DWDS_CF.logger);
         if (!content.isEmpty() && content.get(0).startsWith("<!DOCTYPE html><html lang=\"de\" itemscope itemtype=")) {
             if (content.contains("Zugriff auf diese Seite erhalten Sie, wenn Sie im DWDS eingeloggt sind")) {
                 Logging.warning(DWDS_CF.logger, "(Fetcher) No access to corpus: \"" + requestBuilder.getCorpus() + "\", maybe check session token.");

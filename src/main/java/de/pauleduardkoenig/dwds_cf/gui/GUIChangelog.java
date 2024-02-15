@@ -34,6 +34,12 @@ public class GUIChangelog extends JDialog {
                     <h1 id="changelog">Changelog</h1>
                     <p>All notable changes to this project will be documented in this file.</p>
                     <h2 id="-beta-builds-">[Beta Builds]</h2>
+                    <h2 id="-1-2-3-15-02-2024">[1.2.3] - 15.02.2024</h2>
+                    <h3 id="fix">Fix</h3>
+                    <ul>
+                    <li>Return to home when stopping fetch.</li>
+                    <li>Exported in wrong format</li>
+                    </ul>
                     <h2 id="-1-2-2-15-02-2024">[1.2.2] - 15.02.2024</h2>
                     <h3 id="add">Add</h3>
                     <ul>
@@ -60,7 +66,6 @@ public class GUIChangelog extends JDialog {
                     <ul>
                     <li>Initial Release</li>
                     </ul>
-                    
                 """);
         logPane.setCaretPosition(0);
     }

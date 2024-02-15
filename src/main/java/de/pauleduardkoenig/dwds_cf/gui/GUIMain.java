@@ -658,6 +658,7 @@ public class GUIMain {
         stopButton.addActionListener(e -> {
             RequestCompiler.compileThreadRunning = false;
             Logging.log(DWDS_CF.logger, "(Fetcher) Stopped!");
+            tabbedPane.setSelectedIndex(0);
         });
 
     }
@@ -850,11 +851,6 @@ public class GUIMain {
         if (cpgesetzeCheck.isSelected()) {
             corpora.add("gesetze");
         }
-
-
-
-
-
 
         if (corpora.isEmpty()) {
             Logging.error(DWDS_CF.logger, "No corpus selected. Picked default coprus (kern)!");

@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [Beta Builds]
 
+## [1.2.3] - 15.02.2024
+
+### Fix
+
+- Return to home when stopping fetch.
+- Exported in wrong format
+
 ## [1.2.2] - 15.02.2024
 
 ### Add
