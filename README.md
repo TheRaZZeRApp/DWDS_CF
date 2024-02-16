@@ -1,12 +1,12 @@
 # DWDS-CF
 
-Wrapper and formatter for the [DWDS Corpus](https://www.dwds.de/r) API.
+GUI Wrapper and formatter for the [DWDS Corpus](https://www.dwds.de/r) API.
 
 ## Description
 
-Usefull to automate request at the corpus for e.g. multiple words or corpora.
+Useful to automate requests at the corpus for e.g. multiple words or corpora.
 This tool allows to combine multiple corpora into one CSV or JSON file per 'dcc' request.
-For explenation of fields check: [API](https://www.dwds.de/d/api#export)
+For explanation of fields check: [API](https://www.dwds.de/d/api#export)
 
 ## Getting Started
 
