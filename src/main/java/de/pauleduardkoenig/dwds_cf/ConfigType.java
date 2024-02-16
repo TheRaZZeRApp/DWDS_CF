@@ -11,7 +11,7 @@ import java.time.Year;
  * @author Paul Eduard Koenig <rezzer101@googlemail.com>
  * @since 0.1.0
  */
-public enum ConfigType implements ConfigEnum<ConfigType> {
+public enum ConfigType implements ConfigEnum<ConfigType>{
     VERSION(Constants.VERSION),
     SESSION_TOKEN(""),
     LOG_LEVEL("1"),
@@ -92,19 +92,18 @@ public enum ConfigType implements ConfigEnum<ConfigType> {
     CORPORA_CPWENDE(false),
     CORPORA_KORPUS21(false);
 
-
     private final String def;
 
-    ConfigType(String def) {
+    ConfigType(String def){
         this.def = def;
     }
 
-    ConfigType(boolean def) {
+    ConfigType(boolean def){
         this.def = def ? "true" : "false";
     }
 
     @Override
-    public @NotNull String getDefaultValue() {
+    public @NotNull String getDefaultValue(){
         return def;
     }
 }

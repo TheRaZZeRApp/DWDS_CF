@@ -19,13 +19,12 @@ import java.awt.event.MouseListener;
  * @author Paul Eduard Koenig <rezzer101@googlemail.com>
  * @since 0.1.0
  */
-public class GUIAbout extends JDialog {
+public class GUIAbout extends JDialog{
     private JPanel mPanel;
     private JLabel icon;
     private JLabel creditsLabel;
 
-
-    public GUIAbout() {
+    public GUIAbout(){
         $$$setupUI$$$();
         setTitle("About");
         setResizable(false);
@@ -40,31 +39,31 @@ public class GUIAbout extends JDialog {
 
         creditsLabel.setText("<html>DWDS-CF v. " + Constants.VERSION + "<br>Author Paul Eduard Koenig<br>Copyright &copy; 2024 - Paul Eduard Koenig<br>All Rights Reserved<br>pauleduardkoenig@gmail.com<br>Made for the institute of linguistics at<br>Frankfurt Goethe University.</html>");
 
-        creditsLabel.addMouseListener(new MouseListener() {
+        creditsLabel.addMouseListener(new MouseListener(){
             @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2 && !e.isConsumed()) {
+            public void mouseClicked(MouseEvent e){
+                if (e.getClickCount() == 2 && !e.isConsumed()){
                     ClipboardUtils.copyTextToClipboard(creditsLabel.getText());
                 }
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(MouseEvent e){
                 // empty
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(MouseEvent e){
                 // empty
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered(MouseEvent e){
                 // empty
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited(MouseEvent e){
                 // empty
             }
         });
@@ -77,7 +76,7 @@ public class GUIAbout extends JDialog {
      *
      * @noinspection ALL
      */
-    private void $$$setupUI$$$() {
+    private void $$$setupUI$$$(){
         mPanel = new JPanel();
         mPanel.setLayout(new GridLayoutManager(2, 4, new Insets(0, 0, 0, 0), -1, -1));
         final Spacer spacer1 = new Spacer();
@@ -100,7 +99,7 @@ public class GUIAbout extends JDialog {
     /**
      * @noinspection ALL
      */
-    public JComponent $$$getRootComponent$$$() {
+    public JComponent $$$getRootComponent$$$(){
         return mPanel;
     }
 }

@@ -14,7 +14,7 @@ import java.util.Set;
  * @author Paul Eduard Koenig <rezzer101@googlemail.com>
  * @since 0.1.0
  */
-public class DWDSRequestBuilder {
+public class DWDSRequestBuilder{
 
     private String ddc;
     private String corpus;
@@ -26,24 +26,25 @@ public class DWDSRequestBuilder {
     private int limit = 50;
     private int page = -1;
     private ViewType view = ViewType.CSV;
-    public DWDSRequestBuilder() {
+
+    public DWDSRequestBuilder(){
         // empty
     }
 
-    public String getCorpus() {
+    public String getCorpus(){
         return corpus;
     }
 
-    public DWDSRequestBuilder setCorpus(String corpus) {
+    public DWDSRequestBuilder setCorpus(String corpus){
         this.corpus = corpus;
         return this;
     }
 
-    public String getDdc() {
+    public String getDdc(){
         return ddc;
     }
 
-    public DWDSRequestBuilder setDdc(String ddc) {
+    public DWDSRequestBuilder setDdc(String ddc){
         this.ddc = ddc.replace(" ", "%20")
                 .replace("$", "%24")
                 .replace("=", "%3D")
@@ -63,56 +64,56 @@ public class DWDSRequestBuilder {
         return this;
     }
 
-    public ViewType getView() {
+    public ViewType getView(){
         return view;
     }
 
-    public DWDSRequestBuilder setView(ViewType view) {
+    public DWDSRequestBuilder setView(ViewType view){
         this.view = view;
         return this;
     }
 
-    public DWDSRequestBuilder setDateStart(int dateStart) {
+    public DWDSRequestBuilder setDateStart(int dateStart){
         this.dateStart = dateStart;
         return this;
     }
 
-    public DWDSRequestBuilder setDateEnd(int dateEnd) {
+    public DWDSRequestBuilder setDateEnd(int dateEnd){
         this.dateEnd = dateEnd;
         return this;
     }
 
-    public DWDSRequestBuilder setGenre(@Nullable Set<String> genre) {
+    public DWDSRequestBuilder setGenre(@Nullable Set<String> genre){
         this.genre = genre == null ? new HashSet<>() : genre;
         return this;
     }
 
-    public DWDSRequestBuilder setGenre(String genre) {
+    public DWDSRequestBuilder setGenre(String genre){
         this.genre = new HashSet<>();
         this.genre.add(genre);
         return this;
     }
 
-    public DWDSRequestBuilder addGenre(String genre) {
-        if (this.genre == null) {
+    public DWDSRequestBuilder addGenre(String genre){
+        if (this.genre == null){
             this.genre = new HashSet<>();
         }
         this.genre.add(genre);
         return this;
     }
 
-    public DWDSRequestBuilder setFormat(FormatType format) {
+    public DWDSRequestBuilder setFormat(FormatType format){
         this.format = format;
         return this;
     }
 
-    public DWDSRequestBuilder setSort(SortType sort) {
+    public DWDSRequestBuilder setSort(SortType sort){
         this.sort = sort;
         return this;
     }
 
-    public DWDSRequestBuilder setPage(int page) {
-        if (page < 1) {
+    public DWDSRequestBuilder setPage(int page){
+        if (page < 1){
             Logging.error(DWDS_CF.logger, "Min. page is 1!");
             this.page = 1;
         } else {
@@ -121,11 +122,11 @@ public class DWDSRequestBuilder {
         return this;
     }
 
-    public DWDSRequestBuilder setLimit(int limit) {
-        if (limit > 5000) {
+    public DWDSRequestBuilder setLimit(int limit){
+        if (limit > 5000){
             Logging.error(DWDS_CF.logger, "Max. limit is 5000!");
             this.limit = 5000;
-        } else if (limit < 1) {
+        } else if (limit < 1){
             Logging.error(DWDS_CF.logger, "Min. limit is 1!");
             this.limit = 1;
         } else {
@@ -134,43 +135,43 @@ public class DWDSRequestBuilder {
         return this;
     }
 
-    public @NotNull String build() {
-        if (ddc == null || ddc.isBlank()) {
+    public @NotNull String build(){
+        if (ddc == null || ddc.isBlank()){
             Logging.error(DWDS_CF.logger, "Can't create request without DDC!");
             return "";
         }
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("https://www.dwds.de/r/?q=");
         stringBuilder.append(ddc);
-        if (corpus != null && !corpus.isBlank()) {
+        if (corpus != null && !corpus.isBlank()){
             stringBuilder.append("&corpus=");
             stringBuilder.append(corpus);
         }
-        if (dateStart != -1) {
+        if (dateStart != -1){
             stringBuilder.append("&date-start=");
             stringBuilder.append(dateStart);
         }
-        if (dateEnd != -1) {
+        if (dateEnd != -1){
             stringBuilder.append("&date-end=");
             stringBuilder.append(dateEnd);
         }
-        if (genre != null) {
-            for (String g : genre) {
+        if (genre != null){
+            for (String g : genre){
                 stringBuilder.append("&genre=");
                 stringBuilder.append(g);
             }
         }
-        if (format != null) {
+        if (format != null){
             stringBuilder.append("&format=");
             stringBuilder.append(format.toString().toLowerCase());
         }
-        if (sort != null) {
+        if (sort != null){
             stringBuilder.append("&sort=");
             stringBuilder.append(sort.toString().toLowerCase());
         }
         stringBuilder.append("&limit=");
         stringBuilder.append(limit);
-        if (page != -1) {
+        if (page != -1){
             stringBuilder.append("&page=");
             stringBuilder.append(page);
         }
@@ -179,23 +180,23 @@ public class DWDSRequestBuilder {
         return stringBuilder.toString();
     }
 
-    public enum FormatType implements NameTypeEnum<FormatType> {
+    public enum FormatType implements NameTypeEnum<FormatType>{
         KWIC("KWIC (keyword in context)"),
         FULL("FULL (whole sentence)"),
         MAX("MAX (full sentence + 1 sentence of context)");
 
         private final String name;
 
-        FormatType(String name) {
+        FormatType(String name){
             this.name = name;
         }
 
-        public String getName() {
+        public String getName(){
             return name;
         }
     }
 
-    public enum ViewType implements NameTypeEnum<ViewType> {
+    public enum ViewType implements NameTypeEnum<ViewType>{
         CSV("CSV (Comma-Separated Values)"),
         JSON("JSON (JavaScript Object Notation)"),
         TCF("TCF (Text Corpus Format)"),
@@ -203,17 +204,17 @@ public class DWDSRequestBuilder {
 
         private final String name;
 
-        ViewType(String name) {
+        ViewType(String name){
             this.name = name;
         }
 
         @Override
-        public String getName() {
+        public String getName(){
             return name;
         }
     }
 
-    public enum SortType implements NameTypeEnum<SortType> {
+    public enum SortType implements NameTypeEnum<SortType>{
         DATE_ASC("Date Ascending"),
         DATE_DESC("Date Descending"),
         LEFT_ASC("Left Ascending"),
@@ -228,12 +229,12 @@ public class DWDSRequestBuilder {
 
         private final String name;
 
-        SortType(String name) {
+        SortType(String name){
             this.name = name;
         }
 
         @Override
-        public String getName() {
+        public String getName(){
             return name;
         }
     }

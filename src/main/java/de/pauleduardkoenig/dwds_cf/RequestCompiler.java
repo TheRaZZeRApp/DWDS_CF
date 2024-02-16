@@ -21,11 +21,11 @@ import java.util.*;
  * @since 1.0.0
  */
 
-public class RequestCompiler {
+public class RequestCompiler{
 
     public static boolean compileThreadRunning = true;
 
-    public static boolean compile(DWDSRequestBuilder requestBuilder, String wordlist, Set<String> corpora, boolean combineCorpora, String path, String customRows) {
+    public static boolean compile(DWDSRequestBuilder requestBuilder, String wordlist, Set<String> corpora, boolean combineCorpora, String path, String customRows){
         Logging.log(DWDS_CF.logger, "(Fetcher) Starting new DWDS fetch in " + corpora.size() + " corpora.");
 
         int counterWord = 0;
@@ -34,12 +34,12 @@ public class RequestCompiler {
         boolean multiwordrequest = dcc.contains("%WORD%");
         Set<String> wordList = new LinkedHashSet<>(multiwordrequest ? Arrays.stream(wordlist.split("\n")).map(String::trim).toList() : Set.of("dcc"));
         Logging.log(DWDS_CF.logger, multiwordrequest ? ("(Fetcher) Start fetch for " + wordList.size() + " words" + (wordList.size() != 1 ? "!" : "")) : "(Fetcher) Fetching with DCC \"" + dcc + "\"");
-        for (String word : wordList) {
-            if (!compileThreadRunning) {
+        for (String word : wordList){
+            if (!compileThreadRunning){
                 break;
             }
             counterWord++;
-            if (word.isBlank()) {
+            if (word.isBlank()){
                 Logging.warning(DWDS_CF.logger, "(Fetcher) Can't fetch word " + counterWord + "/" + wordList.size() + ". Empty string!");
                 continue;
             }
@@ -47,7 +47,7 @@ public class RequestCompiler {
             List<Trio<String[], String, List<CSVRow>>> entriesCombinedCSV = new LinkedList<>();
             List<JsonElement> entriesCombinedJSON = new LinkedList<>();
 
-            if (multiwordrequest) {
+            if (multiwordrequest){
                 Logging.log(DWDS_CF.logger, "(Fetcher) Fetching word " + counterWord + "/" + wordList.size() + " (" + word + ")");
                 requestBuilder.setDdc(dcc.trim().replace("%WORD%", word));
             } else {
@@ -55,13 +55,13 @@ public class RequestCompiler {
             }
 
             int counterCorpus = 0;
-            for (String corpus : corpora) {
-                if (!compileThreadRunning) {
+            for (String corpus : corpora){
+                if (!compileThreadRunning){
                     break;
                 }
                 Logging.detail(DWDS_CF.logger, "(Fetcher) Fetching corpora " + (counterCorpus++) + "/" + corpora.size() + " (" + corpus + ")");
                 requestBuilder.setCorpus(corpus);
-                switch (requestBuilder.getView()) {
+                switch (requestBuilder.getView()){
                     case CSV, TSV ->
                             exportCSVTSV(requestBuilder, path, corpus, word, entriesCombinedCSV, combineCorpora, customRows);
                     case JSON -> exportJSON(requestBuilder, path, corpus, word, entriesCombinedJSON, combineCorpora);
@@ -69,9 +69,9 @@ public class RequestCompiler {
                 }
             }
 
-            if (combineCorpora) {
+            if (combineCorpora){
 
-                switch (requestBuilder.getView()) {
+                switch (requestBuilder.getView()){
                     case CSV, TSV ->
                             CSVConverter.formatCSVFile(CSVFormatter.transformCorpusCSVFiles(entriesCombinedCSV), new File(path + "dwds_combined_" + Utils.escapeWordToPath(word) + "_" + DateUtils.getCurrentDateTimePath() + ".csv"), Constants.CSV_KWIC_HEADER.toArray(new String[0]), CSVConverter.compileCustomRows(customRows));
                     case JSON ->
@@ -80,20 +80,20 @@ public class RequestCompiler {
             }
             validCounter++;
         }
-        if (compileThreadRunning) {
+        if (compileThreadRunning){
             Logging.log(DWDS_CF.logger, multiwordrequest ? "(Fetcher) Successfully fetched " + validCounter + "/" + wordList.size() + " word" + (wordList.size() != 1 ? "s!" : "!") : "(Fetcher) Successfully fetched!");
             return true;
         }
         return false;
     }
 
-    private static void exportCSVTSV(DWDSRequestBuilder requestBuilder, String path, String corpus, String word, List<Trio<String[], String, List<CSVRow>>> masterRows, boolean combineCorpora, String customRows) {
+    private static void exportCSVTSV(DWDSRequestBuilder requestBuilder, String path, String corpus, String word, List<Trio<String[], String, List<CSVRow>>> masterRows, boolean combineCorpora, String customRows){
         CSVFile csvFile = requestBuilder.getView() == DWDSRequestBuilder.ViewType.TSV ? Fetcher.fetchCSV(requestBuilder, '\t') : Fetcher.fetchCSV(requestBuilder, ',');
-        if (csvFile == null) {
+        if (csvFile == null){
             return;
         }
-        if (DWDS_CF.config.getAsBoolean(ConfigType.CSV_EXPORT_COMBINE_CORPORA) && combineCorpora) {
-            if (csvFile.getLines().length != 0 && !csvFile.getLine(0).getCell(1).isBlank()) {
+        if (DWDS_CF.config.getAsBoolean(ConfigType.CSV_EXPORT_COMBINE_CORPORA) && combineCorpora){
+            if (csvFile.getLines().length != 0 && !csvFile.getLine(0).getCell(1).isBlank()){
                 masterRows.add(new Trio<>(csvFile.getHeader(), corpus, new LinkedList<>(Arrays.stream(csvFile.getLines()).toList())));
             }
         } else {
@@ -101,16 +101,16 @@ public class RequestCompiler {
         }
     }
 
-    private static void exportJSON(DWDSRequestBuilder requestBuilder, String path, String corpus, String word, List<JsonElement> jsonElements, boolean combineCorpora) {
+    private static void exportJSON(DWDSRequestBuilder requestBuilder, String path, String corpus, String word, List<JsonElement> jsonElements, boolean combineCorpora){
         JSONConfigSection jsonConfigSection = Fetcher.fetchJSON(requestBuilder);
-        if (jsonConfigSection == null) {
+        if (jsonConfigSection == null){
             return;
         }
-        if (!combineCorpora) {
+        if (!combineCorpora){
             JSONSaver.save(jsonConfigSection, new File(path + "dwds_" + corpus + "_" + Utils.escapeWordToPath(word) + "_" + DateUtils.getCurrentDateTimePath() + ".json"), StandardCharsets.UTF_8, DWDS_CF.config.getAsInt(ConfigType.JSON_COLLAPSE_LEVEL), DWDS_CF.logger);
         } else {
-            for (int i = 0; i < jsonConfigSection.getObject().size(); i++) {
-                if (!compileThreadRunning) {
+            for (int i = 0; i < jsonConfigSection.getObject().size(); i++){
+                if (!compileThreadRunning){
                     break;
                 }
                 jsonElements.add(jsonConfigSection.getObject().get(String.valueOf(i)));
@@ -118,9 +118,9 @@ public class RequestCompiler {
         }
     }
 
-    private static void exportTCF(DWDSRequestBuilder requestBuilder, String path, String corpus, String word) {
+    private static void exportTCF(DWDSRequestBuilder requestBuilder, String path, String corpus, String word){
         String tcf = Fetcher.fetchTCF(requestBuilder);
-        if (tcf == null) {
+        if (tcf == null){
             return;
         }
         FileUtils.exportFile(tcf, new File(path + "dwds_" + corpus + "_" + Utils.escapeWordToPath(word) + "_" + DateUtils.getCurrentDateTimePath() + ".tcf"), StandardCharsets.UTF_8, DWDS_CF.logger);

@@ -10,6 +10,7 @@ import com.therazzerapp.milorazlib.logger.Logging;
 import com.therazzerapp.milorazlib.swing.BasicNameTypeCellRenderer;
 import com.therazzerapp.milorazlib.swing.SwingUtils;
 import com.therazzerapp.milorazlib.swing.components.JPopupMenuBasic;
+import com.therazzerapp.milorazlib.swing.components.JTextFieldLimit;
 import de.pauleduardkoenig.dwds_cf.*;
 
 import javax.swing.*;
@@ -33,7 +34,7 @@ import java.util.*;
  * @author Paul Eduard Koenig <rezzer101@googlemail.com>
  * @since 0.1.0
  */
-public class GUIMain {
+public class GUIMain{
 
     private final JPopupMenuBasic jPopupMenuBasic = new JPopupMenuBasic();
     private final JFrame frame;
@@ -137,7 +138,7 @@ public class GUIMain {
     private JLabel labelCopyright;
     private Thread fetchThread = null;
 
-    public GUIMain() {
+    public GUIMain(){
         this.frame = new JFrame(Constants.PROGRAMM_NAME + " " + Constants.VERSION);
         $$$setupUI$$$();
         createAndShowUI();
@@ -148,35 +149,35 @@ public class GUIMain {
         toggleViewSettings();
     }
 
-    public static void init() {
+    public static void init(){
         SwingUtilities.invokeLater(GUIMain::new);
     }
 
-    private void createAndShowUI() {
+    private void createAndShowUI(){
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setResizable(true);
         frame.setContentPane(mPanel);
         frame.setSize(520, 600);
-        frame.setMinimumSize(new Dimension(400, 500));
+        frame.setMinimumSize(new Dimension(480, 500));
         frame.setLocationRelativeTo(null);
         frame.setIconImage(Constants.PROGRAMM_ICON);
         SwingUtils.registerJTextComponentPopupMenu(jPopupMenuBasic, mPanel);
         stopButton.setVisible(false);
     }
 
-    private void initContent() {
+    private void initContent(){
         formatCombobox.setRenderer(new BasicNameTypeCellRenderer());
         sortCombobox.setRenderer(new BasicNameTypeCellRenderer());
         viewCombobox.setRenderer(new BasicNameTypeCellRenderer());
-        for (DWDSRequestBuilder.SortType value : DWDSRequestBuilder.SortType.values()) {
+        for (DWDSRequestBuilder.SortType value : DWDSRequestBuilder.SortType.values()){
             sortCombobox.addItem(value);
         }
-        for (DWDSRequestBuilder.ViewType value : DWDSRequestBuilder.ViewType.values()) {
+        for (DWDSRequestBuilder.ViewType value : DWDSRequestBuilder.ViewType.values()){
             viewCombobox.addItem(value);
         }
-        for (DWDSRequestBuilder.FormatType value : DWDSRequestBuilder.FormatType.values()) {
+        for (DWDSRequestBuilder.FormatType value : DWDSRequestBuilder.FormatType.values()){
             formatCombobox.addItem(value);
         }
         wordsArea.setText(CollectionUtils.listToString(FileUtils.getFileContent(new File(DWDS_CF.config.getAsString(ConfigType.WORDLIST)), StandardCharsets.UTF_8, DWDS_CF.logger), "\n"));
@@ -195,9 +196,12 @@ public class GUIMain {
 
         combineCorporaCheck.setEnabled(formatCombobox.getSelectedItem() == DWDSRequestBuilder.FormatType.KWIC);
         showCorpusCheck.setEnabled(formatCombobox.getSelectedItem() == DWDSRequestBuilder.FormatType.KWIC);
+
+        csvEscapeField.setDocument(new JTextFieldLimit(1));
+        csvSeparatorField.setDocument(new JTextFieldLimit(1));
     }
 
-    private void createMenuBar() {
+    private void createMenuBar(){
         /*
         File Menu
          */
@@ -237,14 +241,13 @@ public class GUIMain {
         helpMenu.add(changelog);
         helpMenu.add(about);
 
-
         mainBar.add(fileMenu);
         mainBar.add(helpMenu);
         frame.setJMenuBar(mainBar);
     }
 
-    private void toggleViewSettings() {
-        switch ((DWDSRequestBuilder.ViewType) viewCombobox.getSelectedItem()) {
+    private void toggleViewSettings(){
+        switch ((DWDSRequestBuilder.ViewType) viewCombobox.getSelectedItem()){
             case CSV, TSV -> {
                 viewSettingsTabbedPane.setSelectedIndex(0);
                 viewSettingsTabbedPane.setEnabledAt(0, true);
@@ -266,29 +269,29 @@ public class GUIMain {
         }
     }
 
-    private String compileOverviewText() {
+    private String compileOverviewText(){
         List<String> genres = new LinkedList<>();
-        if (belletristikFictionRadioButton.isSelected()) {
+        if (belletristikFictionRadioButton.isSelected()){
             genres.add("Fiction");
         }
-        if (scienceRadioButton.isSelected()) {
+        if (scienceRadioButton.isSelected()){
             genres.add("Science");
         }
-        if (cosumerLiteraturRadioButton.isSelected()) {
+        if (cosumerLiteraturRadioButton.isSelected()){
             genres.add("Consumer Literature");
         }
-        if (newspaperRadioButton.isSelected()) {
+        if (newspaperRadioButton.isSelected()){
             genres.add("Newspaper");
         }
         String exportSettings = "";
-        if (viewCombobox.getSelectedItem() == DWDSRequestBuilder.ViewType.CSV || viewCombobox.getSelectedItem() == DWDSRequestBuilder.ViewType.TSV) {
+        if (viewCombobox.getSelectedItem() == DWDSRequestBuilder.ViewType.CSV || viewCombobox.getSelectedItem() == DWDSRequestBuilder.ViewType.TSV){
             exportSettings = "<b>Combine Corpora:</b> " + (combineCorporaCheck.isSelected() ? "Yes" : "No") + "<br>" +
                     "<b>Add Corpus Info:</b> " + (showCorpusCheck.isSelected() ? "Yes" : "No") + "<br>" +
                     "<b>Spaces:</b> \"" + csvSpacesSpinner.getValue() + "\"<br>" +
                     "<b>Separator:</b> \"" + csvSeparatorField.getText() + "\"<br>" +
                     "<b>Escape:</b> \"" + csvEscapeField.getText() + "\"<br>" +
                     "<b>New Rows:</b> \"" + CollectionUtils.listToString(Arrays.stream(csvNewRowsArea.getText().split("\n")).toList(), 6, "<br>") + "\"<br>";
-        } else if (viewCombobox.getSelectedItem() == DWDSRequestBuilder.ViewType.JSON) {
+        } else if (viewCombobox.getSelectedItem() == DWDSRequestBuilder.ViewType.JSON){
             exportSettings = "<b>Collapse Level:</b> \"" + jsonCollapseLevelSpinner.getValue() + "\"<br>";
         }
         return "<b>DCC:</b> \"" + dccRequestField.getText() + "\"<br>" +
@@ -305,8 +308,7 @@ public class GUIMain {
                 exportSettings;
     }
 
-
-    private void createListener() {
+    private void createListener(){
         SwingUtils.registerSettingsToggleButtonTextArea(startButton, DWDS_CF.config, ConfigType.REQ_YEAR_START_ENABLED, Set.of(startSpinner));
         SwingUtils.registerSettingsToggleButtonTextArea(endButton, DWDS_CF.config, ConfigType.REQ_YEAR_END_ENABLED, Set.of(endSpinner));
         SwingUtils.registerSettingsToggleButtonTextArea(sortButton, DWDS_CF.config, ConfigType.REQ_SORT_ENABLED, Set.of(sortCombobox));
@@ -319,11 +321,10 @@ public class GUIMain {
         SwingUtils.registerSettingsSpinnerInt(pageSpinner, DWDS_CF.config, ConfigType.REQ_PAGE);
 
         tabbedPane.addChangeListener(e -> {
-            if (tabbedPane.getSelectedIndex() == tabbedPane.getTabCount() - 1) {
+            if (tabbedPane.getSelectedIndex() == tabbedPane.getTabCount() - 1){
                 overviewPane.setText(compileOverviewText());
             }
         });
-
 
         // General
         sortButton.setSelected(DWDS_CF.config.getAsBoolean(ConfigType.REQ_SORT_ENABLED));
@@ -331,17 +332,17 @@ public class GUIMain {
             DWDS_CF.config.setConfigProperty(ConfigType.REQ_SORT_ENABLED, sortButton.isSelected());
             sortCombobox.setEnabled(sortButton.isSelected());
         });
-        try {
+        try{
             sortCombobox.setSelectedItem(DWDSRequestBuilder.SortType.valueOf(DWDS_CF.config.getAsString(ConfigType.REQ_SORT).toUpperCase()));
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e){
             Logging.errorStackTrace(DWDS_CF.logger, e, "Invalid sort setting in config: " + DWDS_CF.config.getAsString(ConfigType.REQ_SORT));
             sortCombobox.setSelectedItem(null);
         }
         sortCombobox.addActionListener(e -> DWDS_CF.config.setConfigProperty(ConfigType.REQ_SORT, sortCombobox.getSelectedItem()));
 
-        try {
+        try{
             formatCombobox.setSelectedItem(DWDSRequestBuilder.FormatType.valueOf(DWDS_CF.config.getAsString(ConfigType.REQ_FORMAT).toUpperCase()));
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e){
             Logging.errorStackTrace(DWDS_CF.logger, e, "Invalid format setting in config: " + DWDS_CF.config.getAsString(ConfigType.REQ_FORMAT));
             formatCombobox.setSelectedItem(null);
         }
@@ -351,24 +352,24 @@ public class GUIMain {
             showCorpusCheck.setEnabled(formatCombobox.getSelectedItem() == DWDSRequestBuilder.FormatType.KWIC);
         });
 
-        dccRequestField.getDocument().addDocumentListener(new DocumentListener() {
+        dccRequestField.getDocument().addDocumentListener(new DocumentListener(){
             @Override
-            public void insertUpdate(DocumentEvent e) {
+            public void insertUpdate(DocumentEvent e){
                 update();
             }
 
             @Override
-            public void removeUpdate(DocumentEvent e) {
+            public void removeUpdate(DocumentEvent e){
                 update();
             }
 
             @Override
-            public void changedUpdate(DocumentEvent e) {
+            public void changedUpdate(DocumentEvent e){
                 update();
             }
 
-            private void update() {
-                if (dccRequestField.getText().isBlank()) {
+            private void update(){
+                if (dccRequestField.getText().isBlank()){
                     Logging.warning(DWDS_CF.logger, "No DCC prompt found!");
                     dccRequestField.setBackground(Color.PINK);
                     tabbedPane.setEnabledAt(1, false);
@@ -382,7 +383,7 @@ public class GUIMain {
         });
 
         continueGeneralButton.addActionListener(e -> {
-            if (dccRequestField.getText().isBlank()) {
+            if (dccRequestField.getText().isBlank()){
                 dccRequestField.setBackground(Color.PINK);
                 tabbedPane.setEnabledAt(1, false);
                 tabbedPane.setEnabledAt(2, false);
@@ -503,30 +504,30 @@ public class GUIMain {
         corpusCheckBoxesExtended.add(cptextbergCheck);
         corpusCheckBoxesExtended.add(cpwendeCheck);
         allExtendedButton.addActionListener(e -> {
-            for (JCheckBox corpusCheckBox : corpusCheckBoxesExtended) {
+            for (JCheckBox corpusCheckBox : corpusCheckBoxesExtended){
                 corpusCheckBox.setSelected(true);
-                for (ActionListener actionListener : corpusCheckBox.getActionListeners()) {
-                    actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "") {
+                for (ActionListener actionListener : corpusCheckBox.getActionListeners()){
+                    actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""){
                     });
                 }
             }
         });
 
         allButton.addActionListener(e -> {
-            for (JCheckBox corpusCheckBox : corpusCheckBoxesExtended) {
+            for (JCheckBox corpusCheckBox : corpusCheckBoxesExtended){
                 corpusCheckBox.setSelected(corpusCheckBoxes.contains(corpusCheckBox));
-                for (ActionListener actionListener : corpusCheckBox.getActionListeners()) {
-                    actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "") {
+                for (ActionListener actionListener : corpusCheckBox.getActionListeners()){
+                    actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""){
                     });
                 }
             }
         });
 
         defaultButton.addActionListener(e -> {
-            for (JCheckBox corpusCheckBox : corpusCheckBoxesExtended) {
+            for (JCheckBox corpusCheckBox : corpusCheckBoxesExtended){
                 corpusCheckBox.setSelected(false);
-                for (ActionListener actionListener : corpusCheckBox.getActionListeners()) {
-                    actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "") {
+                for (ActionListener actionListener : corpusCheckBox.getActionListeners()){
+                    actionListener.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""){
                     });
                 }
             }
@@ -540,32 +541,32 @@ public class GUIMain {
             tabbedPane.setEnabledAt(3, true);
             tabbedPane.setSelectedIndex(3);
         });
-        wordsArea.getDocument().addDocumentListener(new DocumentListener() {
+        wordsArea.getDocument().addDocumentListener(new DocumentListener(){
             @Override
-            public void insertUpdate(DocumentEvent e) {
+            public void insertUpdate(DocumentEvent e){
                 update();
             }
 
             @Override
-            public void removeUpdate(DocumentEvent e) {
+            public void removeUpdate(DocumentEvent e){
                 update();
             }
 
             @Override
-            public void changedUpdate(DocumentEvent e) {
+            public void changedUpdate(DocumentEvent e){
                 update();
             }
 
-            private void update() {
+            private void update(){
                 FileUtils.exportFile(wordsArea.getText(), new File(DWDS_CF.config.getAsString(ConfigType.WORDLIST)), StandardCharsets.UTF_8, DWDS_CF.logger);
             }
         });
 
         // Export
         SwingUtils.registerSettingsToggleButton(combineCorporaCheck, DWDS_CF.config, ConfigType.CSV_EXPORT_COMBINE_CORPORA);
-        try {
+        try{
             viewCombobox.setSelectedItem(DWDSRequestBuilder.ViewType.valueOf(DWDS_CF.config.getAsString(ConfigType.REQ_VIEW).toUpperCase()));
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e){
             Logging.errorStackTrace(DWDS_CF.logger, e, "Invalid view setting in config: " + DWDS_CF.config.getAsString(ConfigType.REQ_VIEW));
             viewCombobox.setSelectedItem(null);
         }
@@ -586,58 +587,56 @@ public class GUIMain {
         SwingUtils.registerTextComponent(tcfIndentField, DWDS_CF.config, ConfigType.TCF_INDENT);
 
         SwingUtils.registerTextComponent(csvEscapeField, DWDS_CF.config, ConfigType.CSV_ESCAPE);
-        try {
-            csvEscapeField.setText("" + DWDS_CF.config.getAsString(ConfigType.CSV_ESCAPE).charAt(0));
-        } catch (IndexOutOfBoundsException ignored) {
+        try{
+            csvEscapeField.setText(String.valueOf(DWDS_CF.config.getAsString(ConfigType.CSV_ESCAPE).charAt(0)));
+        } catch (IndexOutOfBoundsException ignored){
         }
         csvEscapeField.getDocument().addDocumentListener(SwingUtils.getSimpleTextFieldListener(e -> {
-            try {
+            try{
                 DWDS_CF.config.setConfigProperty(ConfigType.CSV_ESCAPE, csvEscapeField.getText().charAt(0));
-            } catch (IndexOutOfBoundsException ignored) {
+            } catch (IndexOutOfBoundsException ignored){
             }
         }));
 
-
-        try {
-            csvSeparatorField.setText("" + DWDS_CF.config.getAsString(ConfigType.CSV_SEPARATOR).charAt(0));
-        } catch (IndexOutOfBoundsException ignored) {
+        try{
+            csvSeparatorField.setText(String.valueOf(DWDS_CF.config.getAsString(ConfigType.CSV_SEPARATOR).charAt(0)));
+        } catch (IndexOutOfBoundsException ignored){
         }
         csvSeparatorField.getDocument().addDocumentListener(SwingUtils.getSimpleTextFieldListener(e -> {
-            try {
+            try{
                 DWDS_CF.config.setConfigProperty(ConfigType.CSV_SEPARATOR, csvSeparatorField.getText().charAt(0));
-            } catch (IndexOutOfBoundsException ignored) {
+            } catch (IndexOutOfBoundsException ignored){
             }
         }));
 
-        csvNewRowsArea.getDocument().addDocumentListener(new DocumentListener() {
+        csvNewRowsArea.getDocument().addDocumentListener(new DocumentListener(){
             @Override
-            public void insertUpdate(DocumentEvent e) {
+            public void insertUpdate(DocumentEvent e){
                 update();
             }
 
             @Override
-            public void removeUpdate(DocumentEvent e) {
+            public void removeUpdate(DocumentEvent e){
                 update();
             }
 
             @Override
-            public void changedUpdate(DocumentEvent e) {
+            public void changedUpdate(DocumentEvent e){
                 update();
             }
 
-            private void update() {
+            private void update(){
                 FileUtils.exportFile(csvNewRowsArea.getText(), new File(DWDS_CF.config.getAsString(ConfigType.CSV_CUSTOM_ROWS)), StandardCharsets.UTF_8, DWDS_CF.logger);
             }
         });
         viewCombobox.addActionListener(e -> toggleViewSettings());
-
 
         // Overview
         returnOverviewButton.addActionListener(e -> tabbedPane.setSelectedIndex(3));
         finishButton.addActionListener(e -> {
             RequestCompiler.compileThreadRunning = true;
             Pair<String, Boolean> save = SwingUtils.getFolderPath("Select folder to save files.", null, frame);
-            if (!save.getValue()) {
+            if (!save.getValue()){
                 Logging.error(DWDS_CF.logger, "No folder selected!");
                 return;
             }
@@ -648,7 +647,7 @@ public class GUIMain {
                 boolean combine = ((requestBuilder.getView() == DWDSRequestBuilder.ViewType.CSV && combineCorporaCheck.isSelected() && combineCorporaCheck.isEnabled()) || (requestBuilder.getView() == DWDSRequestBuilder.ViewType.JSON && jsonCombineCorporaCheck.isSelected()));
                 boolean finished = RequestCompiler.compile(requestBuilder, wordsArea.getText(), getSelectedCorpora(), combine, save.getKey(), csvNewRowsArea.getText());
                 inCompile(false, origin);
-                if (finished) {
+                if (finished){
                     Utils.openPathInDesktop(save.getKey());
                 }
             });
@@ -663,214 +662,213 @@ public class GUIMain {
 
     }
 
-    private DWDSRequestBuilder compileRequest() {
+    private DWDSRequestBuilder compileRequest(){
         DWDSRequestBuilder requestBuilder = new DWDSRequestBuilder();
         requestBuilder.setDdc(dccRequestField.getText().trim());
-        if (limitButton.isSelected()) {
+        if (limitButton.isSelected()){
             requestBuilder.setLimit((int) SwingUtils.getJSpinnerValue(limitSpinner, DWDS_CF.logger));
         }
         requestBuilder.setFormat((DWDSRequestBuilder.FormatType) formatCombobox.getSelectedItem());
-        if (sortButton.isSelected()) {
+        if (sortButton.isSelected()){
             requestBuilder.setSort((DWDSRequestBuilder.SortType) sortCombobox.getSelectedItem());
         }
         requestBuilder.setView((DWDSRequestBuilder.ViewType) viewCombobox.getSelectedItem());
-        if (pageButton.isSelected()) {
+        if (pageButton.isSelected()){
             requestBuilder.setPage((int) SwingUtils.getJSpinnerValue(pageSpinner, DWDS_CF.logger));
         }
-        if (startButton.isSelected()) {
+        if (startButton.isSelected()){
             requestBuilder.setDateStart((int) SwingUtils.getJSpinnerValue(startSpinner, DWDS_CF.logger));
         }
-        if (endButton.isSelected()) {
+        if (endButton.isSelected()){
             requestBuilder.setDateEnd((int) SwingUtils.getJSpinnerValue(endSpinner, DWDS_CF.logger));
         }
-        if (belletristikFictionRadioButton.isSelected()) {
+        if (belletristikFictionRadioButton.isSelected()){
             requestBuilder.addGenre("Belletristik");
         }
-        if (scienceRadioButton.isSelected()) {
+        if (scienceRadioButton.isSelected()){
             requestBuilder.addGenre("Wissenschaft");
         }
-        if (cosumerLiteraturRadioButton.isSelected()) {
+        if (cosumerLiteraturRadioButton.isSelected()){
             requestBuilder.addGenre("Gebrauchsliteratur");
         }
-        if (newspaperRadioButton.isSelected()) {
+        if (newspaperRadioButton.isSelected()){
             requestBuilder.addGenre("Zeitung");
         }
-        if (!belletristikFictionRadioButton.isSelected() && !scienceRadioButton.isSelected() && !cosumerLiteraturRadioButton.isSelected() && !newspaperRadioButton.isSelected()) {
+        if (!belletristikFictionRadioButton.isSelected() && !scienceRadioButton.isSelected() && !cosumerLiteraturRadioButton.isSelected() && !newspaperRadioButton.isSelected()){
             requestBuilder.setGenre(new HashSet<>());
         }
         return requestBuilder;
     }
 
-    public Set<String> getSelectedCorpora() {
+    public Set<String> getSelectedCorpora(){
         Set<String> corpora = new LinkedHashSet<>();
-        if (cpKernCheck.isSelected()) {
+        if (cpKernCheck.isSelected()){
             corpora.add("kern");
         }
-        if (cpCorpus21Check.isSelected()) {
+        if (cpCorpus21Check.isSelected()){
             corpora.add("korpus21");
         }
-        if (cpDtakCheck.isSelected()) {
+        if (cpDtakCheck.isSelected()){
             corpora.add("dtak");
         }
 
-        if (cpdtaCheck.isSelected()) {
+        if (cpdtaCheck.isSelected()){
             corpora.add("dta");
         }
-        if (cpdtaxlCheck.isSelected()) {
+        if (cpdtaxlCheck.isSelected()){
             corpora.add("dtaxl");
         }
-        if (cppublicCheck.isSelected()) {
+        if (cppublicCheck.isSelected()){
             corpora.add("public");
         }
 
-        if (cpregionalCheck.isSelected()) {
+        if (cpregionalCheck.isSelected()){
             corpora.add("regional");
         }
-        if (cpwebxlCheck.isSelected()) {
+        if (cpwebxlCheck.isSelected()){
             corpora.add("webxl");
         }
-        if (cpbz_ppCheck.isSelected()) {
+        if (cpbz_ppCheck.isSelected()){
             corpora.add("bz_pp");
         }
 
-        if (cpbzCheck.isSelected()) {
+        if (cpbzCheck.isSelected()){
             corpora.add("bz");
         }
 
-        if (cpfazCheck.isSelected()) {
+        if (cpfazCheck.isSelected()){
             corpora.add("faz");
         }
-        if (cpndCheck.isSelected()) {
+        if (cpndCheck.isSelected()){
             corpora.add("nd");
         }
 
-        if (cptspCheck.isSelected()) {
+        if (cptspCheck.isSelected()){
             corpora.add("tsp");
         }
 
-        if (cpzeitCheck.isSelected()) {
+        if (cpzeitCheck.isSelected()){
             corpora.add("zeit");
         }
-        if (cpwebCheck.isSelected()) {
+        if (cpwebCheck.isSelected()){
             corpora.add("web");
         }
-        if (cpwebmonitorCheck.isSelected()) {
+        if (cpwebmonitorCheck.isSelected()){
             corpora.add("webmonitor");
         }
-        if (cpballsportCheck.isSelected()) {
+        if (cpballsportCheck.isSelected()){
             corpora.add("ballsport");
         }
-        if (cpjuraCheck.isSelected()) {
+        if (cpjuraCheck.isSelected()){
             corpora.add("jura");
         }
-        if (cpmedizinCheck.isSelected()) {
+        if (cpmedizinCheck.isSelected()){
             corpora.add("medizin");
         }
-        if (cpcoronaCheck.isSelected()) {
+        if (cpcoronaCheck.isSelected()){
             corpora.add("corona");
         }
-        if (cpmodeblogsBlogs.isSelected()) {
+        if (cpmodeblogsBlogs.isSelected()){
             corpora.add("modeblogs");
         }
-        if (cpit_blogsCheck.isSelected()) {
+        if (cpit_blogsCheck.isSelected()){
             corpora.add("it_blogs");
         }
 
-        if (cpblogsCheck.isSelected()) {
+        if (cpblogsCheck.isSelected()){
             corpora.add("blogs");
         }
-        if (cpdtaeCheck.isSelected()) {
+        if (cpdtaeCheck.isSelected()){
             corpora.add("dtae");
         }
-        if (cpadgCheck.isSelected()) {
+        if (cpadgCheck.isSelected()){
             corpora.add("adg");
         }
-        if (cpdinglerCheck.isSelected()) {
+        if (cpdinglerCheck.isSelected()){
             corpora.add("dingler");
         }
-        if (cpibk_dchatCheck.isSelected()) {
+        if (cpibk_dchatCheck.isSelected()){
             corpora.add("ibk_dchat");
         }
-        if (cpuntertitelCheck.isSelected()) {
+        if (cpuntertitelCheck.isSelected()){
             corpora.add("untertitel");
         }
-        if (cpspkCheck.isSelected()) {
+        if (cpspkCheck.isSelected()){
             corpora.add("spk");
         }
-        if (cptextbergCheck.isSelected()) {
+        if (cptextbergCheck.isSelected()){
             corpora.add("textberg");
         }
-        if (cpwendeCheck.isSelected()) {
+        if (cpwendeCheck.isSelected()){
             corpora.add("wende");
         }
-        if (cpddrCheck.isSelected()) {
+        if (cpddrCheck.isSelected()){
             corpora.add("ddr");
         }
-        if (cppolitische_redenCheck.isSelected()) {
+        if (cppolitische_redenCheck.isSelected()){
             corpora.add("politische_reden");
         }
-        if (cpbundestagCheck.isSelected()) {
+        if (cpbundestagCheck.isSelected()){
             corpora.add("bundestag");
         }
-        if (cpsoldatenbriefeCheck.isSelected()) {
+        if (cpsoldatenbriefeCheck.isSelected()){
             corpora.add("soldatenbriefe");
         }
-        if (cpcopadocsCheck.isSelected()) {
+        if (cpcopadocsCheck.isSelected()){
             corpora.add("copadocs");
         }
-        if (cpavhbernCheck.isSelected()) {
+        if (cpavhbernCheck.isSelected()){
             corpora.add("avh-bern");
         }
-        if (cpbruedergemeineCheck.isSelected()) {
+        if (cpbruedergemeineCheck.isSelected()){
             corpora.add("bruedergemeine");
         }
-        if (cppitavalCheck.isSelected()) {
+        if (cppitavalCheck.isSelected()){
             corpora.add("pitaval");
         }
-        if (cpjeanpaulCheck.isSelected()) {
+        if (cpjeanpaulCheck.isSelected()){
             corpora.add("jean_paul");
         }
-        if (cpdekudeCheck.isSelected()) {
+        if (cpdekudeCheck.isSelected()){
             corpora.add("dekude");
         }
-        if (cpnschatzdeuCheck.isSelected()) {
+        if (cpnschatzdeuCheck.isSelected()){
             corpora.add("nschatz_deu");
         }
-        if (cpstimmlosCheck.isSelected()) {
+        if (cpstimmlosCheck.isSelected()){
             corpora.add("stimm-los");
         }
-        if (cpwikibooksCheck.isSelected()) {
+        if (cpwikibooksCheck.isSelected()){
             corpora.add("wikibooks");
         }
-        if (cpwikipediaCheck.isSelected()) {
+        if (cpwikipediaCheck.isSelected()){
             corpora.add("wikipedia");
         }
-        if (cpwikivoyageCheck.isSelected()) {
+        if (cpwikivoyageCheck.isSelected()){
             corpora.add("wikivoyage");
         }
-        if (cpgesetzeCheck.isSelected()) {
+        if (cpgesetzeCheck.isSelected()){
             corpora.add("gesetze");
         }
 
-        if (corpora.isEmpty()) {
+        if (corpora.isEmpty()){
             Logging.error(DWDS_CF.logger, "No corpus selected. Picked default coprus (kern)!");
             corpora.add("kern");
         }
         return corpora;
     }
 
-    public void inCompile(boolean isCompiling, int origin) {
+    public void inCompile(boolean isCompiling, int origin){
         stopButton.setVisible(isCompiling);
         stopButton.setEnabled(isCompiling);
         mTabbedPane.setSelectedIndex(isCompiling ? 1 : origin);
         mTabbedPane.setEnabledAt(0, !isCompiling);
-        for (int i = 0; i < mainBar.getMenuCount(); i++) {
+        for (int i = 0; i < mainBar.getMenuCount(); i++){
             mainBar.getMenu(i).setEnabled(!isCompiling);
         }
     }
 
-
-    private void createUIComponents() {
+    private void createUIComponents(){
         startSpinner = SwingUtils.createDefaultSpinner(DWDS_CF.config.getAsInt(ConfigType.REQ_DATE_START), 0, Year.now().getValue(), 1);
         endSpinner = SwingUtils.createDefaultSpinner(DWDS_CF.config.getAsInt(ConfigType.REQ_DATE_END), 1, Year.now().getValue(), 1);
         limitSpinner = SwingUtils.createDefaultSpinner(DWDS_CF.config.getAsInt(ConfigType.REQ_LIMIT), 1, 5000, 1);
@@ -880,7 +878,6 @@ public class GUIMain {
         tcfIndentLevel = SwingUtils.createDefaultSpinner(DWDS_CF.config.getAsInt(ConfigType.TCF_INDENT_LEVEL), 0, 100, 1);
     }
 
-
     /**
      * Method generated by IntelliJ IDEA GUI Designer
      * >>> IMPORTANT!! <<<
@@ -888,7 +885,7 @@ public class GUIMain {
      *
      * @noinspection ALL
      */
-    private void $$$setupUI$$$() {
+    private void $$$setupUI$$$(){
         createUIComponents();
         mPanel = new JPanel();
         mPanel.setLayout(new GridLayoutManager(5, 1, new Insets(0, 0, 0, 0), -1, -1));
@@ -1473,7 +1470,7 @@ public class GUIMain {
         final JScrollPane scrollPane4 = new JScrollPane();
         scrollPane4.setHorizontalScrollBarPolicy(30);
         scrollPane4.setVerticalScrollBarPolicy(22);
-        panel17.add(scrollPane4, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 60), new Dimension(-1, 200), null, 0, false));
+        panel17.add(scrollPane4, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 60), new Dimension(-1, 400), null, 0, false));
         wordsArea = new JTextArea();
         wordsArea.setEditable(true);
         scrollPane4.setViewportView(wordsArea);
@@ -1727,14 +1724,14 @@ public class GUIMain {
     /**
      * @noinspection ALL
      */
-    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont){
         if (currentFont == null) return null;
         String resultName;
-        if (fontName == null) {
+        if (fontName == null){
             resultName = currentFont.getName();
         } else {
             Font testFont = new Font(fontName, Font.PLAIN, 10);
-            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')){
                 resultName = fontName;
             } else {
                 resultName = currentFont.getName();
@@ -1749,7 +1746,7 @@ public class GUIMain {
     /**
      * @noinspection ALL
      */
-    public JComponent $$$getRootComponent$$$() {
+    public JComponent $$$getRootComponent$$$(){
         return mPanel;
     }
 

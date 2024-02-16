@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.pauleduardkoenig</groupId>
   <artifactId>DWDS_CF</artifactId>
-  <version>1.2.3</version>
+  <version>1.2.4</version>
   <name>Archetype - DWDS_CF</name>
   <url>http://maven.apache.org</url>
 
@@ -103,7 +103,7 @@
             </manifest>
             <manifestEntries>
               <Class-Path>.</Class-Path>
-              <Class-Path>lib/milorazlib-1.12.7.jar</Class-Path>
+              <Class-Path>lib/milorazlib-1.12.8.jar</Class-Path>
             </manifestEntries>
           </archive>
           <finalName>DWDS_CF/DWDS_CF</finalName>
@@ -115,7 +115,7 @@
     <dependency>
       <groupId>com.therazzerapp</groupId>
       <artifactId>milorazlib</artifactId>
-      <version>1.12.7</version>
+      <version>1.12.8</version>
       <scope>system</scope>
       <systemPath>C:/Users/${user.name}/IdeaProjects/MiloRazLIB/target/MiloRazLib/MiloRazLib.jar</systemPath>
     </dependency>

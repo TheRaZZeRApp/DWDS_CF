@@ -15,11 +15,11 @@ import java.awt.*;
  * @author Paul Eduard Koenig <rezzer101@googlemail.com>
  * @since 1.0.0
  */
-public class GUIChangelog extends JDialog {
+public class GUIChangelog extends JDialog{
     private JPanel mPanel;
     private JTextPane logPane;
 
-    public GUIChangelog() {
+    public GUIChangelog(){
         $$$setupUI$$$();
         setTitle("Changelog");
         setResizable(false);
@@ -77,7 +77,7 @@ public class GUIChangelog extends JDialog {
      *
      * @noinspection ALL
      */
-    private void $$$setupUI$$$() {
+    private void $$$setupUI$$$(){
         mPanel = new JPanel();
         mPanel.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         final JScrollPane scrollPane1 = new JScrollPane();
@@ -91,7 +91,7 @@ public class GUIChangelog extends JDialog {
     /**
      * @noinspection ALL
      */
-    public JComponent $$$getRootComponent$$$() {
+    public JComponent $$$getRootComponent$$$(){
         return mPanel;
     }
 

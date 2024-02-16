@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Beta Builds]
 
+## [1.2.4] - 16.02.2024
+
+### Fix
+
+- CSVLoader not separating correctly
+- Various UI things
+- Refactoring
+
 ## [1.2.3] - 15.02.2024
 
 ### Fix

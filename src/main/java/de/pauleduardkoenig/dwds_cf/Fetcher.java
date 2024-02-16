@@ -25,69 +25,78 @@ import java.util.List;
  * @author Paul Eduard Koenig <rezzer101@googlemail.com>
  * @since 0.1.0
  */
-public class Fetcher {
+public class Fetcher{
 
-    private static HTTPSettings getHTTPSettings() {
+    private static HTTPSettings getHTTPSettings(){
         List<Pair<String, String>> props = new LinkedList<>();
         props.add(HTTPSettings.DEFAULT_AGENT);
         props.add(new Pair<>("Cookie", "dwds_session=" + DWDS_CF.config.getAsString(ConfigType.SESSION_TOKEN)));
         return new HTTPSettings(props, DWDS_CF.config.getAsInt(ConfigType.CONNECT_TIMEOUT), DWDS_CF.config.getAsInt(ConfigType.READ_TIMEOUT), StandardCharsets.UTF_8);
     }
 
-    private static Object fetchContent(DWDSRequestBuilder requestBuilder) {
+    private static Object fetchContent(DWDSRequestBuilder requestBuilder){
         List<String> content = HTTPUtils.getHTTPRequestContentList(requestBuilder.build(), getHTTPSettings(), DWDS_CF.logger);
-        if (!content.isEmpty() && content.get(0).startsWith("<!DOCTYPE html><html lang=\"de\" itemscope itemtype=")) {
-            if (content.contains("Zugriff auf diese Seite erhalten Sie, wenn Sie im DWDS eingeloggt sind")) {
-                Logging.warning(DWDS_CF.logger, "(Fetcher) No access to corpus: \"" + requestBuilder.getCorpus() + "\", maybe check session token.");
+        if (!content.isEmpty() && content.get(1).startsWith("<!DOCTYPE html>")){
+            String wholeContent = String.join("\n", content);
+            if (wholeContent.contains("Zugriff auf diese Seite erhalten Sie, wenn Sie im DWDS eingeloggt sind")){
+                Logging.warning(DWDS_CF.logger, "(Fetcher) No access to corpus: \"" + requestBuilder.getCorpus() + "\". To session token!");
+                return null;
+            } else if (wholeContent.contains("timeout elapsed</pre>")){
+                Logging.warning(DWDS_CF.logger, "(Fetcher) Can't connect to corpus: \"" + requestBuilder.getCorpus() + "\". Timeout!");
                 return null;
             }
-            Logging.warning(DWDS_CF.logger, "(Fetcher) Can't connect to corpus: \"" + requestBuilder.getCorpus() + "\", probably timeout.");
+            Logging.warning(DWDS_CF.logger, "(Fetcher) Can't connect to corpus: \"" + requestBuilder.getCorpus() + "\". Reason unknown!");
             return null;
         }
-        if (requestBuilder.getView() == DWDSRequestBuilder.ViewType.CSV || requestBuilder.getView() == DWDSRequestBuilder.ViewType.TSV) {
+        if (content.size() == 2 && content.get(1).startsWith("\"1\",\"\",\"\",\"\",\"\"")){
+            Logging.detail(DWDS_CF.logger, "(Fetcher) No matches in corpus: \"" + requestBuilder.getCorpus() + "\".");
+            return null;
+        }
+
+        if (requestBuilder.getView() == DWDSRequestBuilder.ViewType.CSV || requestBuilder.getView() == DWDSRequestBuilder.ViewType.TSV){
             return content;
         }
         return StringUtils.join(content, "\n");
     }
 
-    public static CSVFile fetchCSV(DWDSRequestBuilder requestBuilder, char separator) {
+    public static CSVFile fetchCSV(DWDSRequestBuilder requestBuilder, char separator){
         List<String> content = FunctionUtils.doWithRetries(() -> {
-            try {
+            try{
                 //noinspection unchecked
                 return (List<String>) fetchContent(requestBuilder);
-            } catch (ClassCastException ignored) {
+            } catch (ClassCastException ignored){
                 return null;
             }
         }, DWDS_CF.config.getAsInt(ConfigType.FETCH_TRIES));
-        if (content == null || content.size() <= 1) {
+        if (content == null || content.size() <= 1){
             return null;
         }
         return CSVLoader.load(requestBuilder.build(), content, separator, '\"', StandardCharsets.UTF_8, DWDS_CF.logger);
     }
 
-    public static JSONConfigSection fetchJSON(DWDSRequestBuilder requestBuilder) {
+    public static JSONConfigSection fetchJSON(DWDSRequestBuilder requestBuilder){
         String content = FunctionUtils.doWithRetries(() -> {
-            try {
+            try{
                 return (String) fetchContent(requestBuilder);
-            } catch (ClassCastException ignored) {
+            } catch (ClassCastException ignored){
                 return null;
             }
         }, DWDS_CF.config.getAsInt(ConfigType.FETCH_TRIES));
         return content == null ? null : JSONLoader.load(content, true, DWDS_CF.logger);
     }
 
-    public static String fetchTCF(DWDSRequestBuilder requestBuilder) {
+    public static String fetchTCF(DWDSRequestBuilder requestBuilder){
         String content = FunctionUtils.doWithRetries(() -> {
-            try {
+            try{
                 return (String) fetchContent(requestBuilder);
-            } catch (ClassCastException ignored) {
+            } catch (ClassCastException ignored){
                 return null;
             }
         }, DWDS_CF.config.getAsInt(ConfigType.FETCH_TRIES));
-        if (content == null) {
+        if (content == null){
             return null;
         }
-        try {
+        try{
             OutputFormat format = OutputFormat.createPrettyPrint();
             format.setIndentSize(DWDS_CF.config.getAsInt(ConfigType.TCF_INDENT_LEVEL));
             format.setSuppressDeclaration(false);
@@ -99,7 +108,7 @@ public class Fetcher {
             XMLWriter writer = new XMLWriter(sw, format);
             writer.write(document);
             return sw.toString();
-        } catch (Exception e) {
+        } catch (Exception e){
             Logging.stackTrace(DWDS_CF.logger, e);
         }
         return content;
