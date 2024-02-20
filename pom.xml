@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.pauleduardkoenig</groupId>
   <artifactId>DWDS_CF</artifactId>
-  <version>1.2.4</version>
+  <version>1.2.5</version>
   <name>Archetype - DWDS_CF</name>
   <url>http://maven.apache.org</url>
 

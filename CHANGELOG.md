@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Beta Builds]
 
+## [1.2.5] - 20.02.2024
+
+### Fix
+
+- Empty fetches no longer appended in JSON view.
+- Remove corpora from current fetch if login is required but no valid session toke is found.
+- TSV not combining multiple corpora.
+- JSON fetching problem regarding error messages.
+- TSV now correctly saves with ".tsv" extension and tabs.
+- Only fetch once if login is required but no valid session toke is found.
+- Various UI things.
+
 ## [1.2.4] - 16.02.2024
 
 ### Fix

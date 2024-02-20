@@ -21,7 +21,7 @@ For explanation of fields check: [API](https://www.dwds.de/d/api#export)
 
 ## Authors
 
-ex. Paul Koenig for 
+ex. Paul Koenig
 
 ## Version History
 
