@@ -1,15 +1,16 @@
 package de.pauleduardkoenig.dwds_cf;
 
 import com.therazzerapp.milorazlib.container.Trio;
-import com.therazzerapp.milorazlib.excel.csv.CSVRow;
+import com.therazzerapp.milorazlib.excel.concurrent.ConcurrentCSVRow;
 import com.therazzerapp.milorazlib.logger.Logging;
 import org.apache.commons.lang3.function.TriFunction;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.Queue;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * <description>
@@ -19,7 +20,7 @@ import java.util.TreeMap;
  */
 public class CSVFormatter{
 
-	private static final Map<String, Integer> HEADER_MAPPING = new TreeMap<>();
+	public static final Map<String, Integer> HEADER_MAPPING = new TreeMap<>();
 
 	static{
 		HEADER_MAPPING.put("no.", 0);
@@ -31,33 +32,30 @@ public class CSVFormatter{
 		HEADER_MAPPING.put("contextafter", 6);
 	}
 
-	public static List<CSVRow> transformCorpusCSVFiles(List<Trio<String[], String, List<CSVRow>>> rowsRaw){
-		List<CSVRow> finalRows = new LinkedList<>();
-		for (Trio<String[], String, List<CSVRow>> stringListPair : rowsRaw){
-			String corpusInfo = "";
-			if (DWDS_CF.config.getAsBoolean(ConfigType.CSV_SHOW_CORPUS)){
-				corpusInfo = ":" + stringListPair.getValue();
-			}
+	public static Queue<ConcurrentCSVRow> transformCorpusCSVFiles(Queue<Trio<String[], String, Queue<ConcurrentCSVRow>>> rowsRaw){
+		Queue<ConcurrentCSVRow> finalRows = new ConcurrentLinkedQueue<>();
+		for (Trio<String[], String, Queue<ConcurrentCSVRow>> stringListPair : rowsRaw){
+			String corpusInfo = DWDS_CF.config.getAsBoolean(ConfigType.CSV_SHOW_CORPUS) ? (":" + stringListPair.getValue()) : "";
 			finalRows.addAll(convert(stringListPair.getThree(), corpusInfo, getMappingArray(stringListPair.getKey()), CSVFormatter::convertRow));
 		}
 		return finalRows;
 	}
 
-	private static List<CSVRow> convert(List<CSVRow> rows, String corpusInfo, int[] index, TriFunction<int[], String[], String, String[]> mapper){
-		List<CSVRow> convertedRows = new LinkedList<>();
+	private static Queue<ConcurrentCSVRow> convert(Queue<ConcurrentCSVRow> rows, String corpus, int[] index, TriFunction<int[], String[], String, String[]> mapper){
+		Queue<ConcurrentCSVRow> convertedRows = new ConcurrentLinkedQueue<>();
 		int counter = 1;
-		for (CSVRow csvRow : rows){
-			String[] formattedRow = mapper.apply(index, csvRow.getRow(), corpusInfo);
+		for (ConcurrentCSVRow csvRow : rows){
+			String[] formattedRow = mapper.apply(index, csvRow.getRow(), corpus);
 			if (formattedRow == null){
 				if (csvRow.getRawRow() != null && csvRow.getRawRow().equals("-->")){
 					continue;
 				}
-				Logging.warning(DWDS_CF.logger, "Can't convert row: " + counter + " in corpus: " + corpusInfo + ". Skipped!");
+				Logging.warning(DWDS_CF.logger, "Can't convert row: " + counter + " in corpus: " + corpus + ". Skipped!");
 				continue;
 			}
 			counter++;
-			convertedRows.add(new CSVRow(
-					csvRow.getCsvFile() == null ? "" : csvRow.getCsvFile().getAbsolutePath(),
+			convertedRows.add(new ConcurrentCSVRow(
+					csvRow.getOrigin(),
 					csvRow.getRowNumber(),
 					csvRow.getRawRow(),
 					formattedRow,
@@ -67,7 +65,8 @@ public class CSVFormatter{
 		return convertedRows;
 	}
 
-	private static int[] getMappingArray(String[] header){
+	private static int[] getMappingArray(String[] h){
+		final String[] header = Arrays.copyOf(h, h.length);
 		int[] index = new int[7];
 		for (int i = 0; i < header.length; i++){
 			if (HEADER_MAPPING.containsKey(header[i].toLowerCase())){
@@ -78,7 +77,6 @@ public class CSVFormatter{
 	}
 
 	private static @Nullable String[] convertRow(int[] index, String[] rawRow, String corpus){
-
 		try{
 			return new String[]{rawRow[index[0]].concat(corpus), rawRow[index[1]], rawRow[index[2]], rawRow[index[3]], rawRow[index[4]], rawRow[index[5]], rawRow[index[6]]};
 		} catch (ArrayIndexOutOfBoundsException e){

@@ -2,8 +2,8 @@ package de.pauleduardkoenig.dwds_cf;
 
 import com.therazzerapp.milorazlib.FunctionUtils;
 import com.therazzerapp.milorazlib.container.Pair;
-import com.therazzerapp.milorazlib.excel.csv.CSVFile;
-import com.therazzerapp.milorazlib.excel.csv.CSVLoader;
+import com.therazzerapp.milorazlib.excel.concurrent.ConcurrentCSVFile;
+import com.therazzerapp.milorazlib.excel.concurrent.ConcurrentCSVLoader;
 import com.therazzerapp.milorazlib.http.HTTPSettings;
 import com.therazzerapp.milorazlib.http.HTTPUtils;
 import com.therazzerapp.milorazlib.json.JSONConfigSection;
@@ -18,6 +18,7 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <description>
@@ -34,42 +35,44 @@ public class Fetcher{
 		return new HTTPSettings(props, DWDS_CF.config.getAsInt(ConfigType.CONNECT_TIMEOUT), DWDS_CF.config.getAsInt(ConfigType.READ_TIMEOUT), StandardCharsets.UTF_8);
 	}
 
-	private static Pair<Object, Boolean> fetchContent(DWDSRequestBuilder requestBuilder){
-		List<String> content = HTTPUtils.getHTTPRequestContentList(requestBuilder.build(), getHTTPSettings(), DWDS_CF.logger);
-		if (!content.isEmpty() && content.size() > 1 && content.get(1).startsWith("<!DOCTYPE html>")){
-			String wholeContent = String.join("\n", content);
+	private static Pair<Object, Boolean> fetchContent(String url, DWDSRequestBuilder.ViewType viewType, String corpus){
+		Map<Integer, String> content = HTTPUtils.getHTTPRequestContentConcurrentMap(url, getHTTPSettings(), DWDS_CF.logger);
+		if (!content.isEmpty() && content.size() > 1 && (content.get(1).startsWith("<!DOCTYPE html>") || content.get(0).startsWith("<!DOCTYPE HTML PUBLIC"))){
+			String wholeContent = String.join("\n", content.values());
 			if (wholeContent.contains("Zugriff auf diese Seite erhalten Sie, wenn Sie im DWDS eingeloggt sind")){
-				Logging.warning(DWDS_CF.logger, "(Fetcher) Can't access corpus : \"" + requestBuilder.getCorpus() + "\". No session token, removed from current fetch!");
-				RequestCompiler.CORPORA_TO_SKIP.add(requestBuilder.getCorpus());
+				Logging.warning(DWDS_CF.logger, "(Fetcher) Can't access corpus : \"" + corpus + "\". No session token, removed from current fetch!");
+				RequestCompiler.CORPORA_TO_SKIP.add(corpus);
 				return new Pair<>(null, false);
 			} else if (wholeContent.contains("timeout elapsed</pre>")){
-				Logging.warning(DWDS_CF.logger, "(Fetcher) Can't connect to corpus: \"" + requestBuilder.getCorpus() + "\". Timeout!");
-				return new Pair<>(null, true);
+				Logging.warning(DWDS_CF.logger, "(Fetcher) Can't connect to corpus: \"" + corpus + "\". Timeout!");
+				return new Pair<>(null, RequestCompiler.compileThreadRunning);
 			}
-			Logging.warning(DWDS_CF.logger, "(Fetcher) Can't connect to corpus: \"" + requestBuilder.getCorpus() + "\". Reason unknown!");
-			return new Pair<>(null, true);
+			Logging.warning(DWDS_CF.logger, "(Fetcher) Can't connect to corpus: \"" + corpus + "\". Reason unknown!");
+			return new Pair<>(null, RequestCompiler.compileThreadRunning);
 		}
-		if (requestBuilder.getView() == DWDSRequestBuilder.ViewType.JSON && content.get(0).equals("[{\"meta_\":{}}]")){
-			Logging.detail(DWDS_CF.logger, "(Fetcher) No matches in corpus: \"" + requestBuilder.getCorpus() + "\".");
-			return new Pair<>(null, true);
+		if (viewType == DWDSRequestBuilder.ViewType.JSON && content.get(0).equals("[{\"meta_\":{}}]")){
+			Logging.detail(DWDS_CF.logger, "(Fetcher) No matches in corpus: \"" + corpus + "\".");
+			return new Pair<>(null, RequestCompiler.compileThreadRunning);
 		}
-		if (content.size() == 2 && (content.get(1).startsWith("\"1\",\"\",\"\",\"\",\"\"") || content.get(1).startsWith("1\t\t\t\t\t"))){
-			Logging.detail(DWDS_CF.logger, "(Fetcher) No matches in corpus: \"" + requestBuilder.getCorpus() + "\".");
-			return new Pair<>(null, true);
+		if (viewType == DWDSRequestBuilder.ViewType.CSV || viewType == DWDSRequestBuilder.ViewType.TSV){
+			if (content.size() >= 2 && (content.get(1).startsWith("\"1\",\"\",\"\",\"\"") || content.get(1).startsWith("1\t\t\t\t\t"))){
+				Logging.detail(DWDS_CF.logger, "(Fetcher) No matches in corpus: \"" + corpus + "\".");
+				return new Pair<>(null, RequestCompiler.compileThreadRunning);
+			}
+			return new Pair<>(content, RequestCompiler.compileThreadRunning);
 		}
-
-		if (requestBuilder.getView() == DWDSRequestBuilder.ViewType.CSV || requestBuilder.getView() == DWDSRequestBuilder.ViewType.TSV){
-			return new Pair<>(content, true);
+		if (viewType == DWDSRequestBuilder.ViewType.TCF && content.size() == 23){ //23 = no tokens/sentences in tcf file
+			return new Pair<>(null, false);
 		}
-		return new Pair<>(StringUtils.join(content, "\n"), true);
+		return new Pair<>(StringUtils.join(content.values(), "\n"), RequestCompiler.compileThreadRunning);
 	}
 
-	public static CSVFile fetchCSV(DWDSRequestBuilder requestBuilder, char separator){
-		List<String> content = FunctionUtils.doWithRetriesAndBreak(() -> {
+	public static ConcurrentCSVFile fetchCSV(String url, DWDSRequestBuilder.ViewType viewType, String corpus, char separator){
+		Map<Integer, String> content = FunctionUtils.doWithRetriesAndBreak(() -> {
 			try{
-				Pair<Object, Boolean> val = fetchContent(requestBuilder);
+				Pair<Object, Boolean> val = fetchContent(url, viewType, corpus);
 				//noinspection unchecked
-				return new Pair<>((List<String>) val.getKey(), val.getValue());
+				return new Pair<>((Map<Integer, String>) val.getKey(), val.getValue());
 			} catch (ClassCastException ignored){
 				return null;
 			}
@@ -77,13 +80,13 @@ public class Fetcher{
 		if (content == null || content.size() <= 1){
 			return null;
 		}
-		return CSVLoader.load(requestBuilder.build(), content, separator, '\"', StandardCharsets.UTF_8, DWDS_CF.logger);
+		return ConcurrentCSVLoader.load(url, content, separator, '\"', DWDS_CF.logger);
 	}
 
-	private static String fetchString(DWDSRequestBuilder requestBuilder){
+	private static String fetchString(String url, DWDSRequestBuilder.ViewType viewType, String corpus){
 		return FunctionUtils.doWithRetriesAndBreak(() -> {
 			try{
-				Pair<Object, Boolean> val = fetchContent(requestBuilder);
+				Pair<Object, Boolean> val = fetchContent(url, viewType, corpus);
 				return new Pair<>((String) val.getKey(), val.getValue());
 			} catch (ClassCastException ignored){
 				return null;
@@ -91,13 +94,13 @@ public class Fetcher{
 		}, DWDS_CF.config.getAsInt(ConfigType.FETCH_TRIES));
 	}
 
-	public static JSONConfigSection fetchJSON(DWDSRequestBuilder requestBuilder){
-		String content = fetchString(requestBuilder);
+	public static JSONConfigSection fetchJSON(String url, DWDSRequestBuilder.ViewType viewType, String corpus){
+		String content = fetchString(url, viewType, corpus);
 		return content == null ? null : JSONLoader.load(content, true, DWDS_CF.logger);
 	}
 
-	public static String fetchTCF(DWDSRequestBuilder requestBuilder){
-		String content = fetchString(requestBuilder);
+	public static String fetchTCF(String url, DWDSRequestBuilder.ViewType viewType, String corpus){
+		String content = fetchString(url, viewType, corpus);
 		if (content == null){
 			return null;
 		}

@@ -27,6 +27,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Year;
 import java.util.List;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * <description>
@@ -136,6 +137,8 @@ public class GUIMain{
 	private JCheckBox cpit_blogsCheck;
 	private JPanel generalPanel;
 	private JLabel labelCopyright;
+	private JCheckBox autotaggingCheck;
+	private JCheckBox csvRemoveDuplicatesCheck;
 	private Thread fetchThread = null;
 
 	public GUIMain(){
@@ -582,6 +585,8 @@ public class GUIMain{
 		});
 		SwingUtils.registerSettingsToggleButton(showCorpusCheck, DWDS_CF.config, ConfigType.CSV_SHOW_CORPUS);
 		SwingUtils.registerSettingsToggleButton(jsonCombineCorporaCheck, DWDS_CF.config, ConfigType.JSON_COMBINE);
+		SwingUtils.registerSettingsToggleButton(autotaggingCheck, DWDS_CF.config, ConfigType.CSV_AUTOTAG);
+		SwingUtils.registerSettingsToggleButton(csvRemoveDuplicatesCheck, DWDS_CF.config, ConfigType.CSV_REMOVE_DUPLICATES);
 		SwingUtils.registerSettingsSpinnerInt(csvSpacesSpinner, DWDS_CF.config, ConfigType.CSV_SPACES);
 		SwingUtils.registerSettingsSpinnerInt(tcfIndentLevel, DWDS_CF.config, ConfigType.TCF_INDENT_LEVEL);
 		SwingUtils.registerSettingsSpinnerInt(jsonCollapseLevelSpinner, DWDS_CF.config, ConfigType.JSON_COLLAPSE_LEVEL);
@@ -650,6 +655,7 @@ public class GUIMain{
 				boolean finished = RequestCompiler.compile(requestBuilder, wordsArea.getText(), getSelectedCorpora(), combine, save.getKey(), csvNewRowsArea.getText());
 				inCompile(false, origin);
 				if (finished){
+					tabbedPane.setSelectedIndex(0);
 					Utils.openPathInDesktop(save.getKey());
 				}
 			});
@@ -702,7 +708,7 @@ public class GUIMain{
 	}
 
 	public Set<String> getSelectedCorpora(){
-		Set<String> corpora = new LinkedHashSet<>();
+		Set<String> corpora = new CopyOnWriteArraySet<>();
 		if (cpKernCheck.isSelected()){
 			corpora.add("kern");
 		}
@@ -1541,41 +1547,41 @@ public class GUIMain{
 		final JScrollPane scrollPane6 = new JScrollPane();
 		panel22.add(scrollPane6, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		final JPanel panel23 = new JPanel();
-		panel23.setLayout(new GridLayoutManager(8, 5, new Insets(0, 0, 0, 0), -1, -1));
+		panel23.setLayout(new GridLayoutManager(10, 5, new Insets(0, 0, 0, 0), -1, -1));
 		scrollPane6.setViewportView(panel23);
 		final Spacer spacer30 = new Spacer();
 		panel23.add(spacer30, new GridConstraints(0, 1, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, 1, GridConstraints.SIZEPOLICY_FIXED, new Dimension(-1, 5), new Dimension(-1, 5), new Dimension(-1, 5), 0, false));
 		final Spacer spacer31 = new Spacer();
-		panel23.add(spacer31, new GridConstraints(7, 1, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+		panel23.add(spacer31, new GridConstraints(9, 1, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		final Spacer spacer32 = new Spacer();
-		panel23.add(spacer32, new GridConstraints(7, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, 1, new Dimension(5, -1), new Dimension(5, -1), new Dimension(5, -1), 0, false));
+		panel23.add(spacer32, new GridConstraints(9, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, 1, new Dimension(5, -1), new Dimension(5, -1), new Dimension(5, -1), 0, false));
 		final Spacer spacer33 = new Spacer();
-		panel23.add(spacer33, new GridConstraints(7, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, 1, new Dimension(5, -1), new Dimension(5, -1), new Dimension(5, -1), 0, false));
+		panel23.add(spacer33, new GridConstraints(9, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, 1, new Dimension(5, -1), new Dimension(5, -1), new Dimension(5, -1), 0, false));
 		final JLabel label68 = new JLabel();
 		label68.setText("Spaces:");
-		panel23.add(label68, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		panel23.add(csvSpacesSpinner, new GridConstraints(3, 2, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		panel23.add(label68, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		panel23.add(csvSpacesSpinner, new GridConstraints(5, 2, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final JLabel label69 = new JLabel();
 		label69.setText("New Rows:");
-		panel23.add(label69, new GridConstraints(6, 1, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		panel23.add(label69, new GridConstraints(8, 1, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final JScrollPane scrollPane7 = new JScrollPane();
 		scrollPane7.setHorizontalScrollBarPolicy(30);
 		scrollPane7.setVerticalScrollBarPolicy(22);
-		panel23.add(scrollPane7, new GridConstraints(6, 2, 1, 2, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 60), new Dimension(-1, 60), new Dimension(-1, 60), 0, false));
+		panel23.add(scrollPane7, new GridConstraints(8, 2, 1, 2, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 60), new Dimension(-1, 60), new Dimension(-1, 60), 0, false));
 		csvNewRowsArea = new JTextArea();
 		csvNewRowsArea.setEditable(true);
 		csvNewRowsArea.setToolTipText("Format: \"rowNumber;headerName\"");
 		scrollPane7.setViewportView(csvNewRowsArea);
 		final JLabel label70 = new JLabel();
 		label70.setText("Separator:");
-		panel23.add(label70, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		panel23.add(label70, new GridConstraints(6, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		csvSeparatorField = new JTextField();
-		panel23.add(csvSeparatorField, new GridConstraints(4, 2, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+		panel23.add(csvSeparatorField, new GridConstraints(6, 2, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 		final JLabel label71 = new JLabel();
 		label71.setText("Escape:");
-		panel23.add(label71, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		panel23.add(label71, new GridConstraints(7, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		csvEscapeField = new JTextField();
-		panel23.add(csvEscapeField, new GridConstraints(5, 2, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+		panel23.add(csvEscapeField, new GridConstraints(7, 2, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 		final JLabel label72 = new JLabel();
 		label72.setText("Combine Corpora:");
 		panel23.add(label72, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -1590,6 +1596,19 @@ public class GUIMain{
 		showCorpusCheck.setText("");
 		showCorpusCheck.setToolTipText("If selected, the current corpus will be appended to the number row.");
 		panel23.add(showCorpusCheck, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label74 = new JLabel();
+		label74.setText("Auto-Tagging:");
+		panel23.add(label74, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		autotaggingCheck = new JCheckBox();
+		autotaggingCheck.setText("");
+		autotaggingCheck.setToolTipText("If selected, the current corpus will be appended to the number row.");
+		panel23.add(autotaggingCheck, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label75 = new JLabel();
+		label75.setText("Remove Duplicates:");
+		panel23.add(label75, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		csvRemoveDuplicatesCheck = new JCheckBox();
+		csvRemoveDuplicatesCheck.setText("");
+		panel23.add(csvRemoveDuplicatesCheck, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final JPanel panel24 = new JPanel();
 		panel24.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
 		viewSettingsTabbedPane.addTab("JSON", panel24);
@@ -1601,13 +1620,13 @@ public class GUIMain{
 		panel24.add(spacer36, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, 1, new Dimension(5, -1), new Dimension(5, -1), new Dimension(5, -1), 0, false));
 		final Spacer spacer37 = new Spacer();
 		panel24.add(spacer37, new GridConstraints(3, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, 1, new Dimension(5, -1), new Dimension(5, -1), new Dimension(5, -1), 0, false));
-		final JLabel label74 = new JLabel();
-		label74.setText("Collapse Level:");
-		panel24.add(label74, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label76 = new JLabel();
+		label76.setText("Collapse Level:");
+		panel24.add(label76, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		panel24.add(jsonCollapseLevelSpinner, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final JLabel label75 = new JLabel();
-		label75.setText("Combine Corpora:");
-		panel24.add(label75, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label77 = new JLabel();
+		label77.setText("Combine Corpora:");
+		panel24.add(label77, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		jsonCombineCorporaCheck = new JCheckBox();
 		jsonCombineCorporaCheck.setText("");
 		jsonCombineCorporaCheck.setToolTipText("Only in KWIC format. If selected, all header will be mapped into kern header");
@@ -1615,9 +1634,9 @@ public class GUIMain{
 		final JPanel panel25 = new JPanel();
 		panel25.setLayout(new GridLayoutManager(4, 4, new Insets(0, 0, 0, 0), -1, -1));
 		viewSettingsTabbedPane.addTab("TCF", panel25);
-		final JLabel label76 = new JLabel();
-		label76.setText("Indent Level:");
-		panel25.add(label76, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label78 = new JLabel();
+		label78.setText("Indent Level:");
+		panel25.add(label78, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		panel25.add(tcfIndentLevel, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final Spacer spacer38 = new Spacer();
 		panel25.add(spacer38, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, 1, GridConstraints.SIZEPOLICY_FIXED, new Dimension(-1, 5), new Dimension(-1, 5), new Dimension(-1, 5), 0, false));
@@ -1629,18 +1648,18 @@ public class GUIMain{
 		panel25.add(spacer41, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
 		final Spacer spacer42 = new Spacer();
 		panel25.add(spacer42, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, 1, new Dimension(5, -1), new Dimension(5, -1), new Dimension(5, -1), 0, false));
-		final JLabel label77 = new JLabel();
-		label77.setText("Indent:");
-		panel25.add(label77, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label79 = new JLabel();
+		label79.setText("Indent:");
+		panel25.add(label79, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		tcfIndentField = new JTextField();
 		panel25.add(tcfIndentField, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 		viewCombobox = new JComboBox();
 		panel21.add(viewCombobox, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-		final JLabel label78 = new JLabel();
-		Font label78Font = this.$$$getFont$$$(null, Font.BOLD, 12, label78.getFont());
-		if (label78Font != null) label78.setFont(label78Font);
-		label78.setText("Advanced Settings");
-		panel21.add(label78, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label80 = new JLabel();
+		Font label80Font = this.$$$getFont$$$(null, Font.BOLD, 12, label80.getFont());
+		if (label80Font != null) label80.setFont(label80Font);
+		label80.setText("Advanced Settings");
+		panel21.add(label80, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final JSeparator separator10 = new JSeparator();
 		panel21.add(separator10, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final Spacer spacer43 = new Spacer();
@@ -1678,11 +1697,11 @@ public class GUIMain{
 		scrollPane8.setViewportView(panel28);
 		final Spacer spacer47 = new Spacer();
 		panel28.add(spacer47, new GridConstraints(1, 0, 3, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, 1, new Dimension(5, -1), new Dimension(5, -1), new Dimension(5, -1), 0, false));
-		final JLabel label79 = new JLabel();
-		Font label79Font = this.$$$getFont$$$(null, Font.BOLD, 13, label79.getFont());
-		if (label79Font != null) label79.setFont(label79Font);
-		label79.setText("Overview");
-		panel28.add(label79, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+		final JLabel label81 = new JLabel();
+		Font label81Font = this.$$$getFont$$$(null, Font.BOLD, 13, label81.getFont());
+		if (label81Font != null) label81.setFont(label81Font);
+		label81.setText("Overview");
+		panel28.add(label81, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 		final Spacer spacer48 = new Spacer();
 		panel28.add(spacer48, new GridConstraints(0, 2, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, 1, GridConstraints.SIZEPOLICY_FIXED, new Dimension(-1, 5), new Dimension(-1, 5), new Dimension(-1, 5), 0, false));
 		final Spacer spacer49 = new Spacer();
